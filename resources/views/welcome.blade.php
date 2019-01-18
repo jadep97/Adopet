@@ -28,7 +28,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" target="_blank">Adoption</a>
+            <a href=" {{ route('pet.create') }}" class="nav-link waves-effect" target="_blank">Adoption</a>
           </li>
           <li class="nav-item">
             <a class="nav-link waves-effect" target="_blank">About Adopet</a>
@@ -55,7 +55,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link border border-light rounded waves-effect"
+            <a href='/login' class="nav-link border border-light rounded waves-effect"
               target="_blank">
               <i class="fa fa-user "></i>Login
             </a>
