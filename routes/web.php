@@ -25,6 +25,7 @@ Route::get('/adoption', function () {
 //     return view('pages.petlist', ['pets' => $pets]);
 // });
 
+Route::get('/pet/postPet/{id}', 'PetController@postPet');
 
 Route::resource('pet', 'PetController');
 

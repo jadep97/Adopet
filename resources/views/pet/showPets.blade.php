@@ -24,11 +24,12 @@
             <td>{{  $pet->breed }}</td>
             <td>{{  $pet->address }}</td>
             <td>{{  $pet->petInfo }}</td>
+						<td>{{  $pet->isPosted }}</td>
+						<td>  <button type="submit" href="{{ URL::to('home/'   . $pet->id)  }}">Post</button></td>
         </tr>
-        
+
     @endforeach
   </tbody>
 </table>
-    
-@endsection
 
+@endsection

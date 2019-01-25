@@ -18,8 +18,8 @@
 
 @section('content')
 
-<div class="container">
-
+<div class="container petlist-page">
+	<prompt text="Post pet?"></prompt>
 	<table class="table table-hover">
 	  <thead>
 	    <tr>
@@ -29,11 +29,11 @@
 				<th scope="col">Breed</th>
 				<th scope="col">Address</th>
 				<th scope="col">Pet Information</th>
+				<th scope="col">Status</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 			@foreach ($pets as $pet)
-
 					<tr>
 							<td>{{  $pet->petName }}</td>
 							<td>{{  $pet->petOwner }}</td>
@@ -41,13 +41,14 @@
 							<td>{{  $pet->breed }}</td>
 							<td>{{  $pet->address }}</td>
 							<td>{{  $pet->petInfo }}</td>
-							<td><button type="submit" class="btn btn-primary">Post</button></td>
+							<td>
+								<button type="submit" class="btn btn-sm btn-primary" @click="postPet({{$pet->id}})">Post</button>
+							</td>
 					</tr>
-
-
-
-			@endforeach
+			@endforeach		
 	  </tbody>
 	</table>
 </div>
+
+
 @endsection

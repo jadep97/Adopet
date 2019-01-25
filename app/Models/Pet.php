@@ -9,13 +9,12 @@ class Pet extends Model
 {
     //
     protected $fillable = [
-
         'petName',
         'petOwner',
         'petBirth',
         'breed',
         'address',
         'petInfo',
-
+				'isPosted'
     ];
 }

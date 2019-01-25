@@ -1,7 +1,7 @@
 @extends('layouts.app');
 
 @section('content')
- 
+
     <form method="post" action=" {{ route('pet.store') }} ">
         @if ($errors->any())
       <div class="alert alert-danger">
@@ -23,5 +23,7 @@
         <button type="submit">Submit</button>
     </div>
     </form>
+
+		
 
 @endsection

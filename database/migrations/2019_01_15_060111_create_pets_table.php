@@ -20,6 +20,7 @@ class CreatePetsTable extends Migration
             $table->string('breed');
             $table->string('petBirth');
             $table->string('address');
+						$table->boolean('isPosted')->nullable();
             $table->string('petInfo');
             $table->timestamps();
         });

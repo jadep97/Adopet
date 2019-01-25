@@ -40,11 +40,11 @@
 						<i class="fa fa-twitter"></i>
 					</a>
 				</li> -->
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<a href='/login' class="nav-link border border-light rounded waves-effect">
 						<i class="fa fa-user "></i>Login
 					</a>
-				</li>
+				</li> -->
 			</ul>
 
 		</div>

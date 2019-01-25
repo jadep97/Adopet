@@ -1,3 +1,5 @@
+[v-cloak] > * { display:none }
+
 /* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
 html,
 body,
@@ -56,3 +58,30 @@ header,
 	margin: 100px auto 0 auto;
   width: 500px;
 }
+
+
+.petlist-page.container {
+	min-height: 550px;
+}
+.petlist-page tr, .petlist-page td {
+	text-align: center;
+}
+
+.petlist-page button {
+	margin: 0;
+}
+
+
+.prompt {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #fff;
+	height: 100px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+	border-radius: 5px;
+	padding: 10px;
+}
+
+/* .prompt */

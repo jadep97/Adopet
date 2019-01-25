@@ -39,14 +39,12 @@ class PetController extends Controller
     {
         //
         $request->validate([
-
             'petName' => 'required',
             'petOwner' => 'required',
             'petBirth' => 'required',
             'breed' => 'required',
             'address' => 'required',
             'petInfo' => 'required'
-
         ]);
 
         $pet = new Pet([
@@ -55,8 +53,8 @@ class PetController extends Controller
             'petBirth' => $request->get('petBirth'),
             'breed' => $request->get('breed'),
             'address' => $request->get('address'),
-            'petInfo' => $request->get('petInfo')
-
+            'petInfo' => $request->get('petInfo'),
+						'isPosted' => $request->get('isPosted')
         ]);
         $pet->save();
         return redirect('/pet')->with('success', 'Pet Added for Adoption');
@@ -136,5 +134,15 @@ class PetController extends Controller
         $pet->delete();
 
         return view('/welcome')->with('success', 'Pet has been deleted');
+    }
+
+		public function postPet($id)
+    {
+        $pet = Pet::find($id);
+
+				dd($pet);
+				if($pet) {
+					$pet->isPosted = 1; // set to one to make it true
+				}
     }
 }
