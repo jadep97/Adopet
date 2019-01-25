@@ -14,11 +14,9 @@ class PetController extends Controller
      */
     public function index()
     {
-        //
         $pets = Pet::all();
 
-        return view('pet.showPets', compact('pets'));
-        
+        return view('pages.petlist', compact('pets'));
     }
 
     /**
@@ -28,8 +26,7 @@ class PetController extends Controller
      */
     public function create()
     {
-        //
-        return view('pet.createPet');
+        return view('pages.petcreate');
     }
 
     /**
@@ -53,7 +50,6 @@ class PetController extends Controller
         ]);
 
         $pet = new Pet([
-
             'petName' => $request->get('petName'),
             'petOwner' => $request->get('petOwner'),
             'petBirth' => $request->get('petBirth'),

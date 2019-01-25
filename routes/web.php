@@ -12,14 +12,24 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
+
+Route::get('/adoption', function () {
+    return view('pages.adoption');
+});
+
+// Route::get('/pet/list', function () {
+// 	$pets = DB::table('pets')->get();
+//
+//     return view('pages.petlist', ['pets' => $pets]);
+// });
+
+
 Route::resource('pet', 'PetController');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login', 'loginController@index');
 Auth::routes();
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
-
-
-
