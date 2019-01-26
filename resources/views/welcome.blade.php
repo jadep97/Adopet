@@ -54,12 +54,29 @@
               <i class="fa fa-twitter"></i>
             </a>
           </li>
+          @auth
           <li class="nav-item">
-            <a href='/login' class="nav-link border border-light rounded waves-effect"
-              target="_blank">
+            <a href="{{ url('/') }}" class="nav-link border border-light rounded waves-effect">
+              <i class="fa fa-user "></i>Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link border border-light rounded waves-effect">
+              <i class="fa fa-user "></i>{{ Auth::user()->first_name }} - Logout
+            </a>
+          </li>
+          @else
+          <li class="nav-item">
+            <a href="{{ route('login') }}" class="nav-link border border-light rounded waves-effect">
               <i class="fa fa-user "></i>Login
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('register') }}" class="nav-link border border-light rounded waves-effect">
+              <i class="fa fa-user "></i>Register
+            </a>
+          </li>
+          @endauth
         </ul>
 
       </div>
