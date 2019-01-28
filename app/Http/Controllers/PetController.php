@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pet;
+use DB;
 
 class PetController extends Controller
 {
@@ -54,7 +55,7 @@ class PetController extends Controller
             'breed' => $request->get('breed'),
             'address' => $request->get('address'),
             'petInfo' => $request->get('petInfo'),
-						'isPosted' => $request->get('isPosted')
+						'isPosted' => false
         ]);
         $pet->save();
         return redirect('/pet')->with('success', 'Pet Added for Adoption');
@@ -140,9 +141,13 @@ class PetController extends Controller
     {
         $pet = Pet::find($id);
 
-				dd($pet);
 				if($pet) {
-					$pet->isPosted = 1; // set to one to make it true
+					$pet->update(['isPosted' => true]);
 				}
+
     }
+
+		public function getPostedPets() {
+			return DB::select('select * from pets where isPosted = 1');
+		}
 }

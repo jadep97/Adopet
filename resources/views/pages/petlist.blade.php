@@ -35,19 +35,37 @@
 	  <tbody>
 			@foreach ($pets as $pet)
 					<tr>
-							<td>{{  $pet->petName }}</td>
-							<td>{{  $pet->petOwner }}</td>
-							<td>{{  $pet->petBirth }}</td>
-							<td>{{  $pet->breed }}</td>
-							<td>{{  $pet->address }}</td>
-							<td>{{  $pet->petInfo }}</td>
-							<td>
-								<button type="submit" class="btn btn-sm btn-primary" @click="postPet({{$pet->id}})">Post</button>
+							<td class="name">
+								<span>{{ $pet->petName }}</span>
+							</td>
+							<td class="owner">
+								<span>{{ $pet->petOwner }}</span>
+							</td>
+							<td class="birth">
+								<span>{{ $pet->petBirth }}</span>
+							</td>
+							<td class="breed">
+								<span>{{ $pet->breed }}</span>
+							</td>
+							<td class="address">
+								<span>{{ $pet->address }}</span>
+							</td>
+							<td class="info">
+								<span>{{ $pet->petInfo }}</span>
+							</td>
+							<td class="is-posted">
+								@if($pet->isPosted == 0)
+									<button type="submit" class="btn btn-sm btn-primary" @click="postPet({{$pet->id}})">Post</button>
+								@else
+									<span>is posted</span>
+								@endif
 							</td>
 					</tr>
-			@endforeach		
+			@endforeach
 	  </tbody>
 	</table>
+
+	<!-- <prompt text="Confirm pet?"></prompt> -->
 </div>
 
 

@@ -43,8 +43,4 @@
 		<script type="text/javascript" src="/js/vuejs.js"></script>
 		<!-- Main JS -->
 		<script type="text/javascript" src="/js/main.js"></script>
-
-		<script>
-			window.baseURL = '{{ env('DB_HOST') }}';
-		</script>
 </html>
