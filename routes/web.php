@@ -14,10 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('pet', 'PetController');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login', 'loginController@index');
 Auth::routes();
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('pet', 'PetController');
+});
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
 
