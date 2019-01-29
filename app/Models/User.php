@@ -21,10 +21,12 @@ class User extends Authenticable
         'last_name',
         'token',
         'active',
+				'gender'
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+				'token'
     ];
 }
