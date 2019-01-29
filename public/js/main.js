@@ -40,11 +40,9 @@ var app = new Vue({
 				axios.get('/pet/postPet/' + petId);
 
 				axios.get('/pet/')
-										.then(function(response) {
-											location.reload();
-										});
-
-				location.reload();
+							.then(function(response) {
+								location.reload();
+							});
 			} else {}
 		}
 	},
