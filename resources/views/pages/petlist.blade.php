@@ -53,6 +53,7 @@
 							<td class="info">
 								<span>{{ $pet->petInfo }}</span>
 							</td>
+						
 							<td class="is-posted">
 								@if($pet->isPosted == 0)
 									<button type="submit" class="btn btn-sm btn-primary" @click="postPet({{$pet->id}})">Post</button>

@@ -35,7 +35,7 @@
 		<div class="container">
 
 			<!--Navbar-->
-			<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" v-if="false">
+			<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
 
 				<!-- Navbar brand -->
 				<span class="navbar-brand">Categories:</span>
@@ -115,6 +115,14 @@
 								<h4 class="font-weight-bold blue-text">
 									<strong>@{{ pet.petBirth }}</strong>
 								</h4>
+
+								<h5>
+									<strong>
+										<a href="" class="black-text">@{{ pet.petName }}
+											<!-- <span class="badge badge-pill danger-color">NEW</span> -->
+										</a>
+									</strong>
+								</h5>
 
 							</div>
 							<!--Card content-->

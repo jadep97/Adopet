@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -27,11 +26,15 @@ class LoginController extends Controller
     public function create(){
         // this function use to create user account
 
-        
-
     }
     public function username(){
+
         return 'username';
     }
-    
+
+		public function logout() {
+			Auth::logout();
+  return redirect('/login');
+		}
+
 }
