@@ -31,8 +31,13 @@ Route::get('/pet/getPostedPets', 'PetController@getPostedPets');
 Route::resource('pet', 'PetController');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/login', 'LoginController@index');
-Route::get('/logout', 'LoginController@logout');
+Route::get('/login', 'loginController@index');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
 Auth::routes();
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('pet', 'PetController');
+});
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');

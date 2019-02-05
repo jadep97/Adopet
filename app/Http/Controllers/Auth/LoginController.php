@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -32,9 +33,8 @@ class LoginController extends Controller
         return 'username';
     }
 
-		public function logout() {
-			Auth::logout();
-  return redirect('/login');
-		}
-
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
 }

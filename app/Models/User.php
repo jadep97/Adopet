@@ -2,31 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticable
+class User extends Authenticatable
 {
-    //
     use Notifiable;
 
-    const ACTIVE = 1;
-    const INACTIVE = 0;
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'username',
-        'password',
-        'first_name',
-        'last_name',
-        'token',
-        'active',
-				'gender'
+        'first_name', 'last_name', 'gender', 'username', 'password'
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
-        'password',
-        'remember_token',
-				'token'
+        'password', 'remember_token',
     ];
+
 }

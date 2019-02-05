@@ -28,7 +28,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href=" {{ route('pet.create') }}" class="nav-link waves-effect" target="_blank">Adoption</a>
+            <a href=" {{ route('pet.create') }}" class="nav-link waves-effect">Adoption</a>
           </li>
           <li class="nav-item">
             <a class="nav-link waves-effect" target="_blank">About Adopet</a>
