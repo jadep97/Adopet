@@ -2,35 +2,46 @@
 new WOW().init();
 
 
-// Vue.component('prompt', {
-//   data: function () {
-//     return {
-//       show: true,
-//     }
-//   },
-// 	props: ['text'],
-//   template: `
-// 		<div class="prompt" v-if="show">
-// 			<div class="prompt__close-btn">
-// 				<button @click="show = true">x</button>
-// 			</div>
-//
-// 			<div class="prompt__body">
-// 				{{ text }}
-// 			</div>
-//
-// 			<div class="prompt__button">
-// 				<button type="submit" class="btn btn-sm btn-primary waves-effect waves-light">OK</button>
-// 			</div>
-// 		</div>
-// 	`
-// });
+Vue.component('prompt', {
+  data: function () {
+    return {
+      show: true
+    }
+  },
+	props: {
+		petData: {}
+	},
+	created: function () {
+		// console.log(this.petData);
+	},
+  template: `
+		<div class="prompt" v-if="show">
+			<div class="prompt__close-btn">
+				<button @click="show = true">x</button>
+			</div>
+
+			<div class="prompt__body">
+				{{ petData.petName }}
+			</div>
+
+			<div class="prompt__button">
+				<button type="submit" class="btn btn-sm btn-primary waves-effect waves-light">OK</button>
+			</div>
+		</div>
+	`
+});
 
 var app = new Vue({
   el: '#app',
   data: {
 		pets: {}
   },
+
+	filters: {
+	  formatDate: function (date) {
+	    return moment(date).format('MMM DD, YYYY');
+	  }
+	},
 
 	methods: {
 		// method for posting pet and changing status
@@ -53,7 +64,7 @@ var app = new Vue({
 
 		axios.get('/pet/getPostedPets/')
 								.then(function (response) {
-									// console.log(response);
+									console.log(response);
 									$this.pets = response.data;
 								});
 	}

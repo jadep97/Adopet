@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 use App\models;
 
 class Pet extends Model
 {
-    //
     protected $fillable = [
         'petName',
         'petOwner',
@@ -15,6 +15,12 @@ class Pet extends Model
         'breed',
         'address',
         'petInfo',
-				'isPosted'
+				'isPosted',
+				'user_id'
     ];
+		// 
+		// public function users()
+		// {
+		// 	return $this->belongsTo(User::class, 'user_id');
+		// }
 }

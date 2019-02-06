@@ -22,9 +22,16 @@ class CreatePetsTable extends Migration
             $table->string('address');
 						$table->boolean('isPosted')->nullable();
             $table->string('petInfo');
-            $table->timestamps();
+						$table->unsignedInteger('user_id');
+				    $table->timestamps();
+
+						$table->foreign('user_id')
+												->references('id')->on('users')
+												->onUpdate('cascade');
         });
     }
+
+
 
     /**
      * Reverse the migrations.

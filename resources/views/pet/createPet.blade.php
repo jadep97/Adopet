@@ -15,7 +15,7 @@
     <div class="form-group">
         {{ csrf_field() }}
         <input type="text" name="petName" id="petName" placeholder="Pet Name">
-        <input type="text" name="petOwner" id="petOwner" placeholder="Pet Owner">
+        <!-- <input type="text" name="petOwner" id="petOwner" placeholder="Pet Owner"> -->
         <input type="text" name="petBirth" id="petBirth" placeholder="Pet Birth">
         <input type="text" name="breed" id="breed" placeholder="Breed">
         <input type="text" name="address" id="address" placeholder="Address">
@@ -24,6 +24,6 @@
     </div>
     </form>
 
-		
+
 
 @endsection

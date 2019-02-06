@@ -20,12 +20,20 @@
 
 				@include('includes.navbar')
 
+				<!-- @section('sidebar')
+				this is sidebar
+				@show -->
+
 				<div class="content-wrapper">
 					@yield('content')
 				</div>
 
 				@include('includes.footer')
+
+				<prompt></prompt>
 			</div>
+
+
 		</body>
 
 		<!-- SCRIPTS -->
@@ -39,6 +47,8 @@
 		<script type="text/javascript" src="/js/mdb.min.js"></script>
 		<!-- Axios -->
 		<script type="text/javascript" src="/js/axios.js"></script>
+		<!-- Moment -->
+		<script type="text/javascript" src="/js/moment.js"></script>
 		<!-- Vue JavaScript -->
 		<script type="text/javascript" src="/js/vuejs.js"></script>
 		<!-- Main JS -->

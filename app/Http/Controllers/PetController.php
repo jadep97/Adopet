@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pet;
+use Auth;
 use DB;
 
 class PetController extends Controller
@@ -15,8 +16,7 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Pet::all();
-
+				$pets = DB::select('select * from pets where user_id = ' . Auth::user()->id);
         return view('pages.petlist', compact('pets'));
     }
 
@@ -55,8 +55,10 @@ class PetController extends Controller
             'breed' => $request->get('breed'),
             'address' => $request->get('address'),
             'petInfo' => $request->get('petInfo'),
+						'user_id' => Auth::user()->id,
 						'isPosted' => false
         ]);
+
         $pet->save();
         return redirect('/pet')->with('success', 'Pet Added for Adoption');
     }
@@ -148,6 +150,8 @@ class PetController extends Controller
     }
 
 		public function getPostedPets() {
-			return DB::select('select * from pets where isPosted = 1');
+			return DB::select('SELECT * FROM pets
+												 		INNER JOIN users ON pets.user_id = users.id
+												 WHERE isPosted = 1');
 		}
 }

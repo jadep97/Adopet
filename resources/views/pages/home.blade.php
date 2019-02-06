@@ -89,47 +89,36 @@
 						<!--Card-->
 						<div class="card">
 
-							<!--Card image-->
 							<div class="view overlay">
+								<!--Card image-->
+								<!-- <div class="view overlay">
+
+								</div> -->
 								<img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" alt="">
 								<a>
 									<div class="mask rgba-white-slight"></div>
 								</a>
+								<!--Card image-->
+
+								<!--Card content-->
+								<div class="card-body">
+									<h4 class="font-weight-bold blue-text">
+										<strong>@{{ pet.petName }}</strong>
+									</h4>
+
+									<h5>
+										<strong>
+											<a href="" class="dark-grey-text">@{{ pet.breed }}
+												<!-- <span class="badge badge-pill danger-color">NEW</span> -->
+											</a>
+										</strong>
+									</h5>
+								</div>
+								<!--Card content-->
 							</div>
-							<!--Card image-->
-
-							<!--Card content-->
-							<div class="card-body text-center">
-								<!--Category & Title-->
-								<a href="" class="grey-text">
-									<h5>@{{ pet.breed }}</h5>
-								</a>
-								<h5>
-									<strong>
-										<a href="" class="dark-grey-text">@{{ pet.petName }}
-											<!-- <span class="badge badge-pill danger-color">NEW</span> -->
-										</a>
-									</strong>
-								</h5>
-
-								<h4 class="font-weight-bold blue-text">
-									<strong>@{{ pet.petBirth }}</strong>
-								</h4>
-
-								<h5>
-									<strong>
-										<a href="" class="black-text">@{{ pet.petName }}
-											<!-- <span class="badge badge-pill danger-color">NEW</span> -->
-										</a>
-									</strong>
-								</h5>
-
-							</div>
-							<!--Card content-->
-
+							
 						</div>
 						<!--Card-->
-						<pre>@{{ pet }}</pre>
 					</div>
 					<!--Grid column-->
 				</div>
