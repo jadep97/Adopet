@@ -57,13 +57,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Shirts</a>
+							<a class="nav-link" href="#">Dogs</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Sport wears</a>
+							<a class="nav-link" href="#">Cats</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Outwears</a>
+							<a class="nav-link" href="#">Breed</a>
 						</li>
 
 					</ul>
@@ -85,16 +85,16 @@
 				<!--Grid row-->
 				<div class="row wow fadeIn" >
 					<!--Grid column-->
-					<div class="col-lg-3 col-md-6 mb-4" v-for="pet in pets">
+						<div class="col-lg-3 col-md-6 mb-4" v-for="pet in pets" @click="showModal(pet)">
 						<!--Card-->
-						<div class="card">
+						<div class="card" data-toggle="modal" data-target="#exampleModalLong">
 
 							<div class="view overlay">
 								<!--Card image-->
 								<!-- <div class="view overlay">
 
 								</div> -->
-								<img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" alt="">
+									<img :src="'/images/'+ JSON.parse(pet.petImg)[0]" class="card-img-top" alt="" height="175">
 								<a>
 									<div class="mask rgba-white-slight"></div>
 								</a>
@@ -102,6 +102,9 @@
 
 								<!--Card content-->
 								<div class="card-body">
+									<h4 class="font-weight-bold blue-text">
+										<strong>@{{ pet.id }}</strong>
+									</h4>
 									<h4 class="font-weight-bold blue-text">
 										<strong>@{{ pet.petName }}</strong>
 									</h4>
@@ -113,10 +116,12 @@
 											</a>
 										</strong>
 									</h5>
+
 								</div>
 								<!--Card content-->
+
 							</div>
-							
+
 						</div>
 						<!--Card-->
 					</div>
@@ -167,6 +172,65 @@
 			<!--Pagination-->
 
 		</div>
+
+		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" v-if="petDetail">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<h5 class="modal-title" id="exampleModalLongTitle">@{{ petDetail.id }}</h5>
+
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div> <!-- // modal-header -->
+
+						<div class="modal-body">
+								<img class="img-responsive"
+										 v-if="petImages"
+										 v-for="img in petImages"
+										 :src="'/images/'+ img"
+										 class="card-img-top"
+										 height="175">
+							<hr>
+
+							<h5>
+								<i>Name </i><strong>:</strong>
+								<span>
+									@{{ petDetail.petName }}
+								</span>
+							</h5>
+							<h5>
+								<i>Breed </i><strong>:</strong>
+								<span>
+									@{{ petDetail.breed }}
+								</span>
+							</h5>
+							<h5>
+								<i>Birth </i><strong>:</strong>
+								<span>
+									@{{ petDetail.petBirth }}
+								</span>
+							</h5>
+							<h5>
+								<i>Owner </i><strong>:</strong>
+								<span>
+									@{{ petDetail.username }}
+								</span>
+							</h5>
+
+						</div> <!-- // modal-body -->
+
+						 <div class="modal-footer">
+							 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+							 <form method="get" class="form" :action="'/pet/getUserRequest/' + petDetail.id">
+							 	<button type="submit" class="btn btn-primary">Adopt</button>
+							 </form>
+						 </div> <!-- // modal-footer -->
+					</div>
+			</div> <!-- // modal-dialog -->
+		</div>  <!-- // modal -->
 	</main>
 	<!--Main layout-->
 @endsection

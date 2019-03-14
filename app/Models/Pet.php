@@ -16,9 +16,10 @@ class Pet extends Model
         'address',
         'petInfo',
 				'isPosted',
-				'user_id'
+				'user_id',
+				'petImg'
     ];
-		// 
+		//
 		// public function users()
 		// {
 		// 	return $this->belongsTo(User::class, 'user_id');

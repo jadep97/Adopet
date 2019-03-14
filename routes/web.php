@@ -27,6 +27,7 @@ Route::get('/adoption', function () {
 
 Route::get('/pet/postPet/{id}', 'PetController@postPet');
 Route::get('/pet/getPostedPets', 'PetController@getPostedPets');
+Route::get('/pet/getUserRequest/{id}', 'PetController@getUserRequest');
 
 Route::resource('pet', 'PetController');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pet;
+use App\Models\User;
 use Auth;
 use DB;
 
@@ -16,7 +17,9 @@ class PetController extends Controller
      */
     public function index()
     {
+
 				$pets = DB::select('select * from pets where user_id = ' . Auth::user()->id);
+
         return view('pages.petlist', compact('pets'));
     }
 
@@ -38,17 +41,19 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
-            'petName' => 'required',
-            'petOwner' => 'required',
-            'petBirth' => 'required',
-            'breed' => 'required',
-            'address' => 'required',
-            'petInfo' => 'required'
-        ]);
 
-        $pet = new Pet([
+        // $request->validate([
+        //     'petName' => 'required',
+        //     'petOwner' => 'required',
+        //     'petBirth' => 'required',
+        //     'breed' => 'required',
+        //     'address' => 'required',
+        //     'petInfo' => 'required',
+				// 		'petImg' => 'required',
+    		// 		'petImg.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        // ]);
+
+				$pet = new Pet([
             'petName' => $request->get('petName'),
             'petOwner' => $request->get('petOwner'),
             'petBirth' => $request->get('petBirth'),
@@ -58,6 +63,18 @@ class PetController extends Controller
 						'user_id' => Auth::user()->id,
 						'isPosted' => false
         ]);
+
+				$data = array();
+
+				if($request->hasfile('petImg')) {
+					foreach($request->file('petImg') as $image) {
+						$name=$image->getClientOriginalName();
+						$image->move(public_path().'/images/', $name);
+						$data[] = $name;
+					}
+
+					$pet->petImg = json_encode($data);
+				}
 
         $pet->save();
         return redirect('/pet')->with('success', 'Pet Added for Adoption');
@@ -121,7 +138,9 @@ class PetController extends Controller
 
         $pet->save();
 
-        return redirect('/welcome')->with('success', 'Pet has been updated');
+        return view('pages.petlist', compact('pets'))->with('success', 'Pet has been updated');
+
+
     }
 
     /**
@@ -151,7 +170,22 @@ class PetController extends Controller
 
 		public function getPostedPets() {
 			return DB::select('SELECT * FROM pets
-												 		INNER JOIN users ON pets.user_id = users.id
+												 		-- INNER JOIN users ON pets.user_id = users.id
 												 WHERE isPosted = 1');
 		}
+
+		public function getUserRequest($id)
+    {
+
+        $pet = Pet::find($id);
+
+				$pet->petRequest = Auth::user()->id;
+			// dd($pet->petRequest);
+
+				$pet->save();
+				return view('pages.home')->with('success', 'Requested');
+
+
+
+    }
 }
