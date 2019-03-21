@@ -261,6 +261,8 @@
           <!-- Links -->
 
           <form class="form-inline">
+            
+              <a href="{{ route(search) }}"><button type="button" class="btn btn-mdb-color">Pet Finder</button></a>
             <div class="md-form my-0">
               <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
             </div>

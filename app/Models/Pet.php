@@ -19,9 +19,9 @@ class Pet extends Model
 				'user_id',
 				'petImg'
     ];
-		//
-		// public function users()
-		// {
-		// 	return $this->belongsTo(User::class, 'user_id');
-		// }
+		
+		public function withPetDetail()
+		{
+			return $this->hasOne(PetDetail::class);
+		}
 }

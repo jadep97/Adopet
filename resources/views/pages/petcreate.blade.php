@@ -58,7 +58,80 @@
 				<div class="form-group">
 					<input type="text" name="petInfo" id="petInfo" class="form-control" placeholder="Pet Information">
 				</div>
+
+
+		
+
+		<div class="form-group">
+
+				<label>Eyes Color</label>
+				<input type="text" name="petEyes" id="petEyes" class="form-control">
+				
+		</div>
+
+		<div class="form-group">
+
+				<label>Ears</label>
+				<select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petEars">
+						<option value="rounded">Rounded</option>
+						<option value="tipted">Tipted</option>
+						<option value="down">Down</option>
+					  </select>
+		</div>
+		
+		<div class="form-group">
+
+			<label>Hair</label>
+			  <select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petHair">
+				<option value="long">Long</option>
+				<option value="curl">Curl</option>
+				<option value="thick">Thick</option>
+				<option value="fluffy">Fluffy</option>
+			  </select>
+		</div>
+
+		<div class="form-group">
+
+			<label>Tail</label>
+			<select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petTail">
+				<option value="long">Long</option>
+				<option value="short">Short</option>
+			  </select>
+
+		</div>
+
+		<div class="form-group">
+
+			<label>Color</label>
+			<input type="text" name="petColor" id="petColor" class="form-control">
+
+		</div>
+
+		<div class="form-group">
+
+			<label>Markings</label>
+			<select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petMarking" >
+					<option value="dotted">Dotted</option>
+					<option value="stripes">Stripes</option>
+					<option value="wavy">Wavy</option>
+			</select>
+
+		</div>
+
+		<div class="form-group">
+
+			<label>Size</label>
+			<select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petSize">
+					<option value="small">Small</option>
+					<option value="medium">Medium</option>
+					<option value="large">Large</option>
+			</select>
+
+		</div>		
+
+
 				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
 		</form>
 	</div>
 

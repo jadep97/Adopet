@@ -71,6 +71,7 @@
 
 					<form class="form-inline">
 						<div class="md-form my-0">
+							<a href="{{ url('/search') }}"><button type="button" class="btn btn-mdb-color">Pet Finder</button></a>
 							<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
 						</div>
 					</form>

@@ -39,6 +39,10 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('pet', 'PetController');
+
 });
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
+
+Route::get('/search','SearchController@index');
+Route::get('/searchpet','SearchController@searchPet');

@@ -20,12 +20,12 @@ class CreatePetsTable extends Migration
             $table->string('breed');
             $table->string('petBirth');
             $table->string('address');
-						$table->boolean('isPosted')->nullable();
+			$table->boolean('isPosted')->nullable();
             $table->string('petInfo');
-						$table->string('petImg');
-						$table->integer('petRequest')->nullable();
-						$table->unsignedInteger('user_id');
-				    $table->timestamps();
+		    $table->string('petImg');
+			$table->integer('petRequest')->nullable();
+			$table->unsignedInteger('user_id');
+			$table->timestamps();
 
 						$table->foreign('user_id')
 												->references('id')->on('users')
