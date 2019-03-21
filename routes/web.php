@@ -46,3 +46,13 @@ Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activa
 
 Route::get('/search','SearchController@index');
 Route::get('/searchpet','SearchController@searchPet');
+
+Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider');
+ 
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderFacebookCallback');
+
+Route::group(['middleware' => [
+    'auth'
+]], function(){
+    Route::get('/user', 'GraphController@retrieveUserProfile');
+});
