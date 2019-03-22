@@ -19,8 +19,9 @@
 
 @section('content')
 	<div class="container" style="padding-top: 40px">
-		<form method="post" class="form" action="{{ action('SearchController@searchPet') }}" enctype="multipart/form-data">
-			@if ($errors->any())
+			
+		<form method="get" class="form" action="/searchpet" enctype="multipart/form-data">
+			{{-- @if ($errors->any())
 				<div class="alert alert-danger">
 					<ul>
 							@foreach ($errors->all() as $error)
@@ -28,7 +29,7 @@
 							@endforeach
 					</ul>
 				</div><br />
-			@endif
+			@endif --}}
 
 				{{ csrf_field() }}
 				
@@ -38,11 +39,11 @@
 
                         <label>Breed</label>
                         <select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petBreed" id="petBreed">
-                                @foreach ($pet->breeds as $breed)
-									<option value="{{ $pet->id }}">{{ $pet->breed }}</option>
+                                @foreach ($pets as $row)
+									<option value="{{ $row->breed }}">{{ $row->breed }}</option>
 								@endforeach
                               </select>
-                </div>
+                		</div>
 
 					
 

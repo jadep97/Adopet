@@ -31,7 +31,7 @@ Route::get('/pet/getUserRequest/{id}', 'PetController@getUserRequest');
 
 Route::resource('pet', 'PetController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/login', 'loginController@index');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -39,10 +39,18 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('pet', 'PetController');
-
+});
+Route::middleware(['auth'])->group(function(){
+    
+    Route::get('/search', 'SearchController@index');
+    Route::get('/searchpet',['uses' => 'SearchController@searchPet','as' => 'searchpet']);
+    Route::resource('search', 'SearchController');
 });
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
-
-Route::get('/search','SearchController@index');
-Route::get('/searchpet','SearchController@searchPet');
+// ss
+// Route::get('/search','SearchController@index');
+// Route::get('/searchPet',[
+//     'as' => 'search.searchPet',
+//     'uses' => 'SearchController@searchPet'
+// ]);

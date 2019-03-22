@@ -10,6 +10,7 @@ class PetDetail extends Model
     //
     protected $fillable = [
 
+        'breed',
         'eyes',
         'ears',
         'hair',
