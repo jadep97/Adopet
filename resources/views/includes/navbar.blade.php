@@ -43,7 +43,7 @@
 				@auth
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link border border-light rounded waves-effect">
-              <i class="fa fa-user "></i>{{ Auth::user()->username }} - Logout
+              <i class="fa fa-user "></i>{{ Auth::user()->first_name }} - Logout
             </a>
           </li>
           @else

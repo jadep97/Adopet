@@ -47,7 +47,7 @@ Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activa
 Route::get('/search','SearchController@index');
 Route::get('/searchpet','SearchController@searchPet');
 
-Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider');
+Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider')->name('facebook');
  
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderFacebookCallback');
 
