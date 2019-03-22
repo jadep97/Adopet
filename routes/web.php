@@ -54,6 +54,6 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderFacebo
 Route::group(['middleware' => [
     'auth'
 ]], function(){
-    Route::get('/user', 'GraphController@retrieveUserProfile');
-    Route::get('/user/view', 'GraphController@viewLog');
+    Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
+    Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
 });

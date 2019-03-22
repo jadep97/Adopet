@@ -74,7 +74,7 @@ class GraphController extends Controller
             }
             $serializePosts = serialize($user_posts);
             $serializeLikes = serialize($user_likes);
-            $log = FacebookLog::updateOrCreate([
+            $log = FacebookLog::create([
                 'user_posts' => $serializePosts,
                 'user_likes' => $serializeLikes,
                 'user_id' => Auth::user()->id
@@ -84,21 +84,41 @@ class GraphController extends Controller
         } catch (FacebookSDKException $e) {
  
         }
- 
+        return redirect()->to("/user/view");
     }
     public function viewLog(){
         $logs = FacebookLog::where('user_id','=',Auth::user()->id)->get()->toArray();
-        $posts_logs = unserialize($logs[0]['user_posts']);
-        $likes_logs = unserialize($logs[0]['user_likes']);
-        //dd($posts_logs);
-        $data = [
-            [
-                'posts_logs' => $posts_logs,
-                'likes_logs' => $likes_logs
-            ]
-        ];
-        //dd($data);
-        // echo "<pre>"; print_r(unserialize($logs[0]['user_likes'])); "</pre>";
-        return view('pages.facebooklog')->with(['data'=>$data]);
+        //dd(Auth::user()->id);
+        if(!isset($logs[0]) && !isset($logs[0])){
+            echo "<pre id='err'></pre>";
+            ?>
+            <script>
+                var prompt = confirm('You need to fetch data first. Fetch now?');
+                var err = document.getElementById('err');
+                if(prompt){
+                    err.innerHTML = "Fetching data... This might take a while";    
+                    window.location.href="/user";
+                }
+                
+            </script>
+
+            <?php
+        }else{
+            $posts_logs = unserialize($logs[0]['user_posts']);
+            $likes_logs = unserialize($logs[0]['user_likes']);
+
+            //dd($posts_logs);
+            $data = [
+                [
+                    'posts_logs' => $posts_logs,
+                    'likes_logs' => $likes_logs
+                ]
+            ];
+            //dd($data);
+            // echo "<pre>"; print_r(unserialize($logs[0]['user_likes'])); "</pre>";
+            return view('pages.facebooklog')->with(['data'=>$data]);
+        }
+        
+        
     }
 }

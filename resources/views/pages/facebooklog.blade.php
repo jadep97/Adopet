@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+
+
 @section('content')
 
-
+<a href="{{ route('fblog') }}" class="btn btn-primary">Renew Data</a>
 <div class="table-responsive">
 <table class="table table-hover" border=1>
   <thead class="thead-dark">

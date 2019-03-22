@@ -52,16 +52,19 @@ class LoginController extends Controller
         $splitName = explode(' ', $auth_user->name, 2);
         $first_name = $splitName[0];
         $last_name = !empty($splitName[1]) ? $splitName[1] : '';
-        $user = User::updateOrCreate(
-            [
-                'email' => $auth_user->email,
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-                'gender' => $auth_user->user['gender'],
-                'password' => md5(rand(1,10000)),
-                'token' => $auth_user->token
-            ]
-        );
+        $user = User::where('email','=',$auth_user->email)->first();
+        if(!$user){
+            $user = User::updateOrCreate(
+                [
+                    'email' => $auth_user->email,
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'gender' => $auth_user->user['gender'],
+                    'password' => md5(rand(1,10000)),
+                    'token' => $auth_user->token
+                ]
+            );
+        }
  
         Auth::login($user, true);
         return redirect()->to('/'); 
