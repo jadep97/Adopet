@@ -28,5 +28,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function facebookLog(){
+        return $this->hasOne(FacebookLog::class);
+    }
+
 
 }

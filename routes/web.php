@@ -55,4 +55,5 @@ Route::group(['middleware' => [
     'auth'
 ]], function(){
     Route::get('/user', 'GraphController@retrieveUserProfile');
+    Route::get('/user/view', 'GraphController@viewLog');
 });
