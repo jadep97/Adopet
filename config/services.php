@@ -40,4 +40,11 @@ return [
         ],
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_APP_ID'),         // Your Facebook App Client ID
+        'client_secret' => env('FACEBOOK_APP_SECRET'), // Your Facebook App Client Secret
+        'redirect' => env('FACEBOOK_REDIRECT'), // Your application route used to redirect users back to your app after authentication
+        'default_graph_version' => 'v3.2',
+    ],
+
 ];

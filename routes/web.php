@@ -48,9 +48,26 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
+<<<<<<< HEAD
 // ss
 // Route::get('/search','SearchController@index');
 // Route::get('/searchPet',[
 //     'as' => 'search.searchPet',
 //     'uses' => 'SearchController@searchPet'
 // ]);
+=======
+
+Route::get('/search','SearchController@index');
+Route::get('/searchpet','SearchController@searchPet');
+
+Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider')->name('facebook');
+ 
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderFacebookCallback');
+
+Route::group(['middleware' => [
+    'auth'
+]], function(){
+    Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
+    Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
+});
+>>>>>>> 0e42a3f93553842e69a59366c60cea02c05cfa41

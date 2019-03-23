@@ -6,6 +6,34 @@
 		<a class="navbar-brand waves-effect" href="/">
 			<strong class="blue-text">Adopet</strong>
 		</a>
+		@section('navlinks')
+		<!-- <li class="nav-item active">
+			<a class="nav-link waves-effect" href="/">Home
+				<span class="sr-only">(current)</span>
+			</a>
+		</li> -->
+		@auth
+		<li class="nav-item">
+			<a class="nav-link waves-effect" href="/pet">Pet List</a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link waves-effect" href="/pet/create">Pet Create</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link waves-effect" href="{{ route('viewfblog') }}">User Facebook Data</a>
+		</li>
+		@endauth
+		<!-- <li class="nav-item">
+			<a href=" {{ route('pet.create') }}" class="nav-link waves-effect">Adoption</a>
+		</li>
+		<li class="nav-item ">
+			<a href="/adoption" class="nav-link waves-effect">aaa</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link waves-effect" href="/">About Adopet</a>
+		</li> -->
+	@endsection
 
 		<!-- Collapse -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -43,7 +71,7 @@
 				@auth
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link border border-light rounded waves-effect">
-              <i class="fa fa-user "></i>{{ Auth::user()->username }} - Logout
+              <i class="fa fa-user "></i>{{ Auth::user()->first_name }} - Logout
             </a>
           </li>
           @else

@@ -1,20 +1,8 @@
 @extends('layouts.app')
+@extends('pages.home')
 
 @section('title', 'Petlist')
 
-@section('navlinks')
-	<!-- <li class="nav-item ">
-		<a class="nav-link waves-effect" href="/">Home
-			<span class="sr-only">(current)</span>
-		</a>
-	</li> -->
-	<li class="nav-item active">
-		<a class="nav-link waves-effect" href="/pet">Pet List</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link waves-effect" href="/pet/create">Pet Create</a>
-	</li>
-@endsection
 
 @section('content')
 

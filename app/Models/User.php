@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'gender', 'username', 'password'
+        'email', 'first_name', 'last_name', 'gender', 'username', 'password', 'token'
     ];
 
     /**
@@ -27,6 +27,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function facebookLog(){
+        return $this->hasOne(FacebookLog::class);
+    }
 
 
 }

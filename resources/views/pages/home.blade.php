@@ -2,29 +2,7 @@
 
 @section('title', 'Welcome')
 
-@section('navlinks')
-	<!-- <li class="nav-item active">
-		<a class="nav-link waves-effect" href="/">Home
-			<span class="sr-only">(current)</span>
-		</a>
-	</li> -->
-	<li class="nav-item">
-		<a class="nav-link waves-effect" href="/pet">Pet List</a>
-	</li>
 
-	<li class="nav-item">
-		<a class="nav-link waves-effect" href="/pet/create">Pet Create</a>
-	</li>
-	<!-- <li class="nav-item">
-		<a href=" {{ route('pet.create') }}" class="nav-link waves-effect">Adoption</a>
-	</li>
-	<li class="nav-item ">
-		<a href="/adoption" class="nav-link waves-effect">aaa</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link waves-effect" href="/">About Adopet</a>
-	</li> -->
-@endsection
 
 @section('content')
 	<!-- <div>
