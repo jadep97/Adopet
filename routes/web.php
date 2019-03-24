@@ -48,14 +48,12 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
-<<<<<<< HEAD
 // ss
 // Route::get('/search','SearchController@index');
 // Route::get('/searchPet',[
 //     'as' => 'search.searchPet',
 //     'uses' => 'SearchController@searchPet'
 // ]);
-=======
 
 Route::get('/search','SearchController@index');
 Route::get('/searchpet','SearchController@searchPet');
@@ -69,11 +67,6 @@ Route::group(['middleware' => [
 ]], function(){
     Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
     Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
-<<<<<<< Updated upstream
-});
->>>>>>> 0e42a3f93553842e69a59366c60cea02c05cfa41
-=======
+
     Route::get('/recommend', 'GraphController@recommend');
 });
-
->>>>>>> Stashed changes
