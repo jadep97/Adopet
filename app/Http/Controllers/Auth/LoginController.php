@@ -64,9 +64,14 @@ class LoginController extends Controller
                     'token' => $auth_user->token
                 ]
             );
+        }else{
+            Auth::login($user, true);
+            $facebook = User::find(Auth::user()->id);
+            $facebook->token = $auth_user->token;
+            $facebook->save();
         }
  
-        Auth::login($user, true);
+        
         return redirect()->to('/'); 
     }
 }

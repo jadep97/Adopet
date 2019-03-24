@@ -62,12 +62,18 @@ Route::get('/searchpet','SearchController@searchPet');
 
 Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider')->name('facebook');
  
-Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderFacebookCallback');
+Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderFacebookCallback');
 
 Route::group(['middleware' => [
     'auth'
 ]], function(){
     Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
     Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
+<<<<<<< Updated upstream
 });
 >>>>>>> 0e42a3f93553842e69a59366c60cea02c05cfa41
+=======
+    Route::get('/recommend', 'GraphController@recommend');
+});
+
+>>>>>>> Stashed changes

@@ -15,10 +15,12 @@ class CreateFacebookUserLog extends Migration
     {
         Schema::create('facebook_user_log', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('user_posts')->nullable();
-            $table->text('user_likes')->nullable();
+            $table->longText('user_posts')->nullable();
+            $table->longText('user_likes')->nullable();
             $table->timestamps();
             $table->unsignedInteger('user_id');
+            $table->longText('split_posts')->nullable();
+            $table->longText('split_likes')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
