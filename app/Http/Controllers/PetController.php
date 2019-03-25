@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PetDetail;
+use App\Models\PetRequest;
 use App\Models\Pet;
 use App\Models\User;
+use App\Models\Likes;
+use App\Models\Comments;
 use Auth;
 use DB;
 
@@ -56,11 +59,11 @@ class PetController extends Controller
 
 				$pet = new Pet([
             'petName' => $request->get('petName'),
-            'petOwner' => $request->get('petOwner'),
+            'petOwner' => Auth::user()->username,
             'petBirth' => $request->get('petBirth'),
             'breed' => $request->get('breed'),
             'address' => $request->get('address'),
-            'petInfo' => $request->get('petInfo'),
+            'description' => $request->get('description'),
 						'user_id' => Auth::user()->id,
 						'isPosted' => false
         ]);
@@ -76,6 +79,7 @@ class PetController extends Controller
 
 					$pet->petImg = json_encode($data);
 				}
+
 
         $pet->save();
         if($pet->save()){
@@ -96,6 +100,8 @@ class PetController extends Controller
 
 
         }
+
+				$pet->save();
         return redirect('/pet')->with('success', 'Pet Added for Adoption');
     }
 
@@ -142,7 +148,7 @@ class PetController extends Controller
             'petBirth' => 'required',
             'breed' => 'required',
             'address' => 'required',
-            'petInfo' => 'required'
+            'description' => 'required'
 
         ]);
 
@@ -153,7 +159,7 @@ class PetController extends Controller
             $pet->petBirth = $request->get('petBirth');
             $pet->breed = $request->get('breed');
             $pet->address = $request->get('address');
-            $pet->petInfo = $request->get('petInfo');
+            $pet->description = $request->get('description');
 
         $pet->save();
 
@@ -168,6 +174,7 @@ class PetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         //
@@ -184,29 +191,126 @@ class PetController extends Controller
 				if($pet) {
 					$pet->update(['isPosted' => true]);
                 }
-        return redirect()->to('/'); 
+        return redirect()->to('/');
 
     }
 
 		public function getPostedPets() {
+
 			return DB::select('SELECT * FROM pets
-												 		-- INNER JOIN users ON pets.user_id = users.id
+														-- INNER JOIN users ON pets.user_id = users.id
 												 WHERE isPosted = 1');
 		}
 
-		public function getUserRequest($id)
+		public function getProfilePets() {
+					return DB::select("SELECT DISTINCT
+														pets.id,
+														petName,
+														petOwner,
+														petBirth,
+														breed,
+														address,
+														description,
+														petImg,
+														pets.user_id as pets_user_id,
+
+														(SELECT count(*) from likes WHERE pet_id = pets.id) as likeCount
+						FROM pets LEFT JOIN likes on pets.id = likes.pet_id
+						WHERE isPosted = 1 AND pets.user_id = ". Auth::user()->id);
+		}
+
+		public function likePet($id)
+		{
+			$pet = Pet::find($id);
+
+			$like = Likes::create([
+
+				'pet_id' => $pet->id,
+				'user_id' => Auth::user()->id
+			]);
+
+			$like->save();
+			return redirect('/')->with('success', 'Liked');
+
+		}
+
+		public function getLikedPets() {
+					return DB::select("SELECT DISTINCT
+														pets.id,
+														petName,
+														petOwner,
+														petBirth,
+														breed,
+														address,
+														description,
+														petImg,
+														pets.user_id,
+														likes.pet_id,
+														(SELECT count(*) from likes WHERE pet_id = pets.id) as likeCount
+								FROM pets LEFT JOIN likes on pets.id = likes.pet_id
+						WHERE isPosted = 1
+						ORDER BY likeCount DESC");
+		}
+
+		public function commentPet(Request $request, $id)
     {
+			$pet = Pet::find($id);
 
-        $pet = Pet::find($id);
+        $comment = Comments::create([
 
-				$pet->petRequest = Auth::user()->id;
-			// dd($pet->petRequest);
-
-				$pet->save();
-				return view('pages.home')->with('success', 'Requested');
-
+					'pet_id' => $pet->id,
+					'user_id' => Auth::user()->id,
+					'username' => Auth::user()->username,
+					'petComment' => $request->get('petComment'),
 
 
+				]);
+
+				$comment->save();
+					return redirect('/')->with('success', 'Sent');
+		}
+
+		public function getCommentPets($id) {
+
+			return DB::select('SELECT * FROM comments
+												 WHERE pet_id ='. $id);
+		}
+
+		public function requestPet($id)
+    {
+			$pet = Pet::find($id);
+
+        $petRequest = PetRequest::create([
+
+					'pet_id' => $pet->id,
+					'user_id' => Auth::user()->id,
+
+
+				]);
+
+				$petRequest->save();
+				return redirect('/')->with('success', 'Requested');
     }
-    
+
+
+		// public function getUserRequest($id)
+		// {
+		// 	return DB::select("SELECT DISTINCT
+		// 										pets.id,
+		// 										petName,
+		// 										petOwner,
+		// 										petBirth,
+		// 										breed,
+		// 										address,
+		// 										description,
+		// 										petImg,
+		//
+		// 										likes.pet_id,
+		// 										(SELECT count(*) from likes WHERE pet_id = pets.id) as likeCount
+		// 		FROM pets LEFT JOIN likes on pets.id = likes.pet_id
+		// 		WHERE isPosted = 1
+		// 		ORDER BY likeCount DESC");
+		// }
+
+
 }

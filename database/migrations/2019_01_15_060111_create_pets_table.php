@@ -16,20 +16,21 @@ class CreatePetsTable extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->increments('id')->primarykey();
             $table->string('petName');
+						$table->string('breed')->nullable();
             $table->string('petOwner');
-            $table->string('breed');
-            $table->string('petBirth');
+            $table->string('petBirth')->nullable();
             $table->string('address');
-			$table->boolean('isPosted')->nullable();
-            $table->string('petInfo');
-		    $table->string('petImg');
-			$table->integer('petRequest')->nullable();
-			$table->unsignedInteger('user_id');
-			$table->timestamps();
+						$table->string('description')->nullable();
+						$table->boolean('isPosted')->nullable();
+						$table->string('petImg');
+						$table->unsignedInteger('user_id');
+				    $table->timestamps();
+
 
 						$table->foreign('user_id')
-												->references('id')->on('users')
-												->onUpdate('cascade');
+									      ->references('id')->on('users')
+								      	->onUpdate('cascade');
+
         });
     }
 

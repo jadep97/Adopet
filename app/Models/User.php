@@ -16,7 +16,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'first_name', 'last_name', 'gender', 'username', 'password', 'token'
+
+        'email',
+				'first_name',
+				'last_name',
+				'gender',
+				'username',
+				'password',
+				'token'
+
     ];
 
     /**
@@ -28,9 +36,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     public function facebookLog(){
         return $this->hasOne(FacebookLog::class);
     }
+
+
+		public function likes()
+		{
+			return $this->hasMany(Likes::class);
+		}
+
+		public function comments()
+		{
+			return $this->hasMany(Comments::class);
+		}
 
 
 }

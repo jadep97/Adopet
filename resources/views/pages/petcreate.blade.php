@@ -2,8 +2,6 @@
 
 @section('title', 'Create a Pet')
 
-
-
 @section('content')
 	<div class="container" style="padding-top: 40px">
 		<form method="post" class="form" action="{{route('pet.store')}}" enctype="multipart/form-data">
@@ -31,9 +29,6 @@
 					<input type="text" name="petName" id="petName" class="form-control" placeholder="Pet Name">
 				</div>
 				<div class="form-group">
-					<input type="text" name="petOwner" id="petOwner" class="form-control" placeholder="Pet Owner">
-				</div>
-				<div class="form-group">
 					<input type="date" name="petBirth" id="petBirth" class="form-control" placeholder="Pet Birth">
 				</div>
 				<div class="form-group">
@@ -43,17 +38,17 @@
 					<input type="text" name="address" id="address"  class="form-control" placeholder="Address">
 				</div>
 				<div class="form-group">
-					<input type="text" name="petInfo" id="petInfo" class="form-control" placeholder="Pet Information">
+					<input type="text" name="description" id="description" class="form-control" placeholder="Pet Information">
 				</div>
 
 
-		
+
 
 		<div class="form-group">
 
 				<label>Eyes Color</label>
 				<input type="text" name="petEyes" id="petEyes" class="form-control">
-				
+
 		</div>
 
 		<div class="form-group">
@@ -65,7 +60,7 @@
 						<option value="down">Down</option>
 					  </select>
 		</div>
-		
+
 		<div class="form-group">
 
 			<label>Hair</label>
@@ -114,7 +109,7 @@
 					<option value="large">Large</option>
 			</select>
 
-		</div>		
+		</div>
 
 
 				<button type="submit" class="btn btn-primary">Submit</button>

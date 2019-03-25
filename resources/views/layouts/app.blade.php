@@ -18,7 +18,6 @@
 
 		<body>
 			<div id="app" v-cloak>
-
 				@include('includes.navbar')
 
 				<!-- @section('sidebar')
@@ -31,10 +30,9 @@
 
 				@include('includes.footer')
 
+
 				<prompt></prompt>
 			</div>
-
-
 		</body>
 
 		<!-- SCRIPTS -->

@@ -14,11 +14,6 @@
 Route::get('/', function () {
     return view('pages.home');
 });
-
-Route::get('/adoption', function () {
-    return view('pages.adoption');
-});
-
 // Route::get('/pet/list', function () {
 // 	$pets = DB::table('pets')->get();
 //
@@ -27,11 +22,23 @@ Route::get('/adoption', function () {
 
 Route::get('/pet/postPet/{id}', 'PetController@postPet')->name('postpet');
 Route::get('/pet/getPostedPets', 'PetController@getPostedPets');
-Route::get('/pet/getUserRequest/{id}', 'PetController@getUserRequest');
+
+Route::get('/pet/requestPet/{id}', 'PetController@requestPet');
+Route::get('/pet/getUserRequests', 'PetController@getUserRequest');
+
+Route::get('/pet/likePet/{id}', 'PetController@likePet');
+Route::get('/pet/getLikedPets', 'PetController@getLikedPets');
+
+Route::get('/pet/commentPet/{id}', 'PetController@commentPet');
+Route::get('/pet/getCommentPets/{id}', 'PetController@getCommentPets');
+
+
+Route::get('/pet/getProfilePets', 'PetController@getProfilePets');
 
 Route::resource('pet', 'PetController');
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::get('/login', 'loginController@index');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -41,7 +48,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('pet', 'PetController');
 });
 Route::middleware(['auth'])->group(function(){
-    
+
     Route::get('/search', 'SearchController@index');
     Route::get('/searchpet',['uses' => 'SearchController@searchPet','as' => 'searchpet']);
     Route::resource('search', 'SearchController');
@@ -59,7 +66,7 @@ Route::get('/search','SearchController@index');
 Route::get('/searchpet','SearchController@searchPet');
 
 Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider')->name('facebook');
- 
+
 Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderFacebookCallback');
 
 Route::group(['middleware' => [

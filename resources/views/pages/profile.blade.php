@@ -2,6 +2,7 @@
 
 @section('title', 'Welcome')
 
+
 @section('content')
 	<!-- <div>
 		include('includes.carousel')
@@ -48,7 +49,6 @@
 
 					<form class="form-inline">
 						<div class="md-form my-0">
-							<a href="{{ url('/search') }}"><button type="button" class="btn btn-mdb-color">Pet Finder</button></a>
 							<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
 						</div>
 					</form>
@@ -61,58 +61,6 @@
 			<!--Section: Products v.3-->
 			<section class="text-center mb-4">
 				<!--Grid row-->
-				<p>Most Liked</p>
-
-								<div class="row wow fadeIn">
-									<!--Grid column-->
-										<div class="col-lg-3 col-md-6 mb-4" v-for="like in likes" v-if="like.likeCount > 0" @click="showModal(like)">
-										<!--Card-->
-										<div class="card" data-toggle="modal" data-target="#exampleModalLong">
-
-											<div class="view overlay">
-												<!--Card image-->
-												<!-- <div class="view overlay">
-
-												</div> -->
-													<img :src="'/images/'+ JSON.parse(like.petImg)[0]" class="card-img-top" alt="" height="175">
-												<a>
-													<div class="mask rgba-white-slight"></div>
-												</a>
-												<!--Card image-->
-
-												<!--Card content-->
-												<div class="card-body">
-
-													<h4 class="font-weight-bold blue-text">
-														<strong>@{{ like.likeCount }}</strong>
-													</h4>
-													<h4 class="font-weight-bold blue-text">
-														<strong>@{{ like.petName }}</strong>
-													</h4>
-
-													<h5>
-														<strong>
-															<a href="" class="dark-grey-text">@{{ like.breed }}
-																<!-- <span class="badge badge-pill danger-color">NEW</span> -->
-															</a>
-														</strong>
-													</h5>
-												</div>
-												<!--Card content-->
-
-											</div>
-
-
-										</div>
-										<!--Card-->
-
-									</div>
-									<!--Grid column-->
-								</div>
-								<!--Grid row-->
-
-
-				<p>Recommended</p>
 				<div class="row wow fadeIn" >
 					<!--Grid column-->
 						<div class="col-lg-3 col-md-6 mb-4" v-for="pet in pets" @click="showModal(pet)">
@@ -132,7 +80,9 @@
 
 								<!--Card content-->
 								<div class="card-body">
-
+									<h4 class="font-weight-bold blue-text">
+										<strong>@{{ pet.id }}</strong>
+									</h4>
 									<h4 class="font-weight-bold blue-text">
 										<strong>@{{ pet.petName }}</strong>
 									</h4>
@@ -147,7 +97,7 @@
 								</div>
 								<!--Card content-->
 
-								</div>
+							</div>
 
 
 						</div>
@@ -157,10 +107,8 @@
 					<!--Grid column-->
 				</div>
 				<!--Grid row-->
-
-</section>
-<!--Section: Products v.3-->
-
+			</section>
+			<!--Section: Products v.3-->
 
 			<!--Pagination-->
 			<nav class="d-flex justify-content-center wow fadeIn" v-if="false">
@@ -217,7 +165,6 @@
 						</div> <!-- // modal-header -->
 
 						<div class="modal-body">
-
 								<img class="img-responsive"
 										 v-if="petImages"
 										 v-for="img in petImages"
@@ -226,88 +173,72 @@
 										 height="175">
 							<hr>
 
-<div class="pet-details">
-		<div class="pet-info">
+						<div class="pet-details">
+							<div class="pet-info">
+								<h5>
+									<strong>Name:</strong>
+									<span>
+										@{{ petDetail.petName }}
+									</span>
+								</h5>
+								<h5>
+									<strong>Breed:</strong>
+									<span>
+										@{{ petDetail.breed }}
+									</span>
+								</h5>
+								<h5>
+									<strong>Birth:</strong>
+									<span>
+										@{{ petDetail.petBirth | formatDate }}
+									</span>
+								</h5>
+								<h5>
+									<strong>Owner:</strong>
+									<span>
+										@{{ petDetail.petOwner }}
+									</span>
+								</h5>
+								<h5>
+									<strong>Likes:</strong>
+									<span>
+										@{{ petDetail.likeCount }}
+									</span>
+								</h5>
+							</div>
 
-							<h5>
-								<strong>Name:</strong>
-								<span>
-									@{{ petDetail.petName }}
-								</span>
-							</h5>
-							<h5>
-								<strong>Breed:</strong>
-								<span>
-									@{{ petDetail.breed }}
-								</span>
-							</h5>
-							<h5>
-								<strong>Birth:</strong>
-								<span>
-									@{{ petDetail.petBirth | formatDate }}
-								</span>
-							</h5>
-							<h5>
-								<strong>Owner:</strong>
-								<span>
-									@{{ petDetail.petOwner }}
-								</span>
-							</h5>
-							<h5>
-								<strong>Address:</strong>
-								<span>
-									@{{ petDetail.address }}
-								</span>
-							</h5>
-							<h5>
-								<strong>Description:</strong>
-								<span>
-									@{{ petDetail.description }}
-								</span>
-							</h5>
+							<div class="pet-comments">
 
-							<h5>
-								<strong>Likes:</strong>
-								<span>
-									@{{ petDetail.likeCount }}
-								</span>
-							</h5>
+								<div class="pet-comments-inner">
+									<h5>
+										<h6 v-for="comment in comments">
+											"@{{ comment.petComment }}" from
+											<span class="font-weight-bold blue-text">
+												@{{ comment.username }}
+											</span>
 
-</div>
-								<div class="pet-comments">
+										</h6>
+									</h5>
+								</div>
 
-									<div class="pet-comments-inner">
-										<h5>
-											<h6 v-for="comment in comments">
-												"@{{ comment.petComment }}" from
-												<span class="font-weight-bold blue-text">
-													@{{ comment.username }}
-												</span>
+								<!-- Comment section  modal-->
+								<form method="get" class="form" :action="'/pet/commentPet/' + petDetail.id">
 
-											</h6>
-										</h5>
+									<div class="com-inpt">
+										<input type="text" name="petComment" id="petComment" class="form-control" placeholder="Comment" required rows="3"></textarea>
 									</div>
 
-									<!-- Comment section  modal-->
-									<form method="get" class="form" :action="'/pet/commentPet/' + petDetail.id">
-
-										<div class="com-inpt">
-											<input type="text" name="petComment" id="petComment" class="form-control" placeholder="Comment" required rows="3"></textarea>
-										</div>
-
-										<div class="com-btn">
-											<button type="submit" class="btn btn-primary">Send Message</button>
-										</div>
+									<div class="com-btn">
+										<button type="submit" class="btn btn-primary">Send Message</button>
+									</div>
 
 
-									</form>
-									<!-- Comment section -->
-								</div> <!-- // pet-comments -->
-
-
-
+								</form>
+								<!-- Comment section -->
+							</div> <!-- // pet-comments -->
 
 </div>
+
 
 
 						</div> <!-- // modal-body -->

@@ -38,15 +38,29 @@ var app = new Vue({
   el: '#app',
   data: {
 		pets: {},
+		likes: {},
 		imgSrc: '',
 		petDetail: {},
-		petImages: []
+		petImages: [],
+
+		comments: {},
   },
 
 	filters: {
 	  formatDate: function (date) {
-	    	return moment(date).format('MMM DD, YYYY');
+	    	return moment(date).format('MMM D, YYYY');
 	  }
+	},
+
+	// life cycle  hooks
+	created: function() {
+		this.getLikedPets();
+
+		if(window.location.href.indexOf("profile") > -1) {
+			this.getProfilePets();
+		} else {
+			this.getPostedPets();
+		}
 	},
 
 	methods: {
@@ -74,45 +88,54 @@ var app = new Vue({
 
 		showModal: function(pet) {
 			this.petDetail = pet;
+			// this.petComment = pet;
 			this.petImages = JSON.parse(pet.petImg);
-		}
+			this.getCommentPets(pet.id);
+		},
+
+		getPostedPets: function() {
+			let $this = this;
+
+			axios.get('/pet/getPostedPets/')
+						.then(function (response) {
+							$this.pets = response.data;
+							// console.log(response.data);
+						});
+		},
+
+		getProfilePets: function() {
+			let $this = this;
+
+			axios.get('/pet/getProfilePets/')
+						.then(function (response) {
+							$this.pets = response.data;
+							console.log(response.data);
+						});
+		},
+
+		getLikedPets: function() {
+			let $this = this;
+
+			axios.get('/pet/getLikedPets/')
+									.then(function (response) {
+										$this.likes = response.data;
+
+										console.log(response.data);
+									});
+
+		},
+
+		getCommentPets: function(id) {
+			let $this = this;
+
+			axios.get('/pet/getCommentPets/' + id)
+									.then(function (response) {
+										$this.comments = response.data;
+
+										console.log(response.data);
+									});
+
+		},
+
 	},
-
-	// life cycle  hooks
-	created: function() {
-		let $this = this;
-
-		axios.get('/pet/getPostedPets/')
-								.then(function (response) {
-									$this.pets = response.data;
-
-									// console.log($this.pets);
-									// var a = JSON.parse("["05-512.png","9c887c760825a6122b9b85063aa5628d--secret-life-of-pets-wallpaper-cellphone-wallpaper.jpg","800px_COLOURBOX21686142.jpg"]");
-
-									// var st = '["05-512.png","9c887c760825a6122b9b85063aa5628d--secret-life-of-pets-wallpaper-cellphone-wallpaper.jpg","800px_COLOURBOX21686142.jpg"]';
-
-									// console.log(JSON.parse($this.pets[0].petImg));
-
-
-									// if($this.pets) {
-									// 	for(i in $this.pets) {
-									// 		var arr = JSON.parse($this.pets[i].petImg);
-									// 		$this.pets[i].petImg = [];
-									// 		$this.pets[i].petImg = arr;
-									// 		// let arr = JSON.parse(pets[i].petImage);
-									// 		// console.log(pets[i]);
-											// console.log(JSON.parse($this.pets[i].petImg));
-									// 		// console.log(arr);
-									//
-									//
-									// 		// $this.pets[i].petImg = JSON.parse($this.pets[i].petImage);
-											// console.log(response.data);
-									// 	}
-									// }
-									// // $this.pets = response.data;
-									//
-									// // console.log(JSON.parse($this.pets[0].petImg));
-									// // console.log($this.pets);
-								});
-	}
 });

@@ -35,6 +35,8 @@
 		</li> -->
 	@endsection
 
+
+
 		<!-- Collapse -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -69,11 +71,26 @@
 					</a>
 				</li> -->
 				@auth
-          <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link border border-light rounded waves-effect">
-              <i class="fa fa-user "></i>{{ Auth::user()->first_name }} - Logout
-            </a>
-          </li>
+
+					<!-- Split button -->
+					<div class="btn-group">
+					  <button href="/profile" type="button" class="btn btn-info">{{ Auth::user()->username }}</button>
+					  <button type="button" class="btn btn-info dropdown-toggle px-3" data-toggle="dropdown" aria-haspopup="true"
+					    aria-expanded="false">
+					    <span class="sr-only">Toggle Dropdown</span>
+					  </button>
+					  <div class="dropdown-menu">
+					    <a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="/pet">Pet List</a>
+							<a class="dropdown-item" href="/pet/create">Pet Create</a>
+
+							 <div class="dropdown-divider"></div>
+
+							<a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
+
+					  </div>
+					</div>
+
           @else
           <li class="nav-item">
             <a href="{{ route('login') }}" class="nav-link border border-light rounded waves-effect">

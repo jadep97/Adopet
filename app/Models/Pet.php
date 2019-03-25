@@ -15,19 +15,19 @@ class Pet extends Model
         'petBirth',
         'breed',
         'address',
-        'petInfo',
+        'description',
 				'isPosted',
 				'user_id',
 				'petImg'
     ];
-		
+
 		public function withPetDetail()
 		{
 			return $this->hasOne(PetDetail::class);
     }
     public function joinPetDetail($search,$search1,$search2,$search3,$search4,$search5,$search6,$search7){
-      
-      $matchThese = ['breed' => $search, 
+
+      $matchThese = ['breed' => $search,
                      'eyes' => $search1,
                      'ears' => $search2,
                      'hair' => $search3,
@@ -42,11 +42,15 @@ class Pet extends Model
               ->get();
 
     }
-    // public function getJoinPetDetail($query, $search){
 
-    //   return $query->where('breed', 'LIKE', '%$search%' )
-    //                 ->sortByDesc('id');
+		public function likes()
+		{
+			return $this->hasMany(Likes::class);
+		}
 
-    // }
-    
+		public function comments()
+		{
+			return $this->hasMany(Comments::class);
+		}
+
 }
