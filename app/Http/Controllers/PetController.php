@@ -59,7 +59,7 @@ class PetController extends Controller
 
 				$pet = new Pet([
             'petName' => $request->get('petName'),
-            'petOwner' => Auth::user()->username,
+            'petOwner' => Auth::user()->first_name,
             'petBirth' => $request->get('petBirth'),
             'breed' => $request->get('breed'),
             'address' => $request->get('address'),
@@ -256,12 +256,12 @@ class PetController extends Controller
 		public function commentPet(Request $request, $id)
     {
 			$pet = Pet::find($id);
-
+        
         $comment = Comments::create([
 
 					'pet_id' => $pet->id,
 					'user_id' => Auth::user()->id,
-					'username' => Auth::user()->username,
+					'username' => Auth::user()->first_name,
 					'petComment' => $request->get('petComment'),
 
 
