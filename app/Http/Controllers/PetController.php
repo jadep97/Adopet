@@ -72,7 +72,8 @@ class PetController extends Controller
 
 				if($request->hasfile('petImg')) {
 					foreach($request->file('petImg') as $image) {
-						$name=$image->getClientOriginalName();
+            $name=$image->getClientOriginalName();
+            
 						$image->move(public_path().'/images/', $name);
 						$data[] = $name;
 					}

@@ -37,8 +37,10 @@ Route::get('/pet/getProfilePets', 'PetController@getProfilePets');
 
 Route::resource('pet', 'PetController');
 
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'HomeController@profile')->name('profile');
+
 Route::get('/login', 'loginController@index');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -50,9 +52,10 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth'])->group(function(){
 
     Route::get('/search', 'SearchController@index');
-    Route::get('/searchpet',['uses' => 'SearchController@searchPet','as' => 'searchpet']);
+    Route::get('/searchpets',['uses' => 'SearchController@searchPet','as' => 'searchpets']);
     Route::resource('search', 'SearchController');
 });
+
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
 // ss
@@ -62,8 +65,21 @@ Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activa
 //     'uses' => 'SearchController@searchPet'
 // ]);
 
+
+// Route::middleware(['auth'])->group(function(){
+
+    
+//     // Route::get('/post/{id}', 'CommentController@show');
+//     Route::resource('comment', 'CommentController');
+//     Route::get('comment', 'CommentController@index');
+//     //Route::get('/comment/create', 'CommentController@create');
+//     // Route::post('/comment/make', 'CommentController@store')->name('comment.store');
+
+// });
+
+Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
 Route::get('/search','SearchController@index');
-Route::get('/searchpet','SearchController@searchPet');
+Route::get('/searchpets','SearchController@searchPets');
 
 Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider')->name('facebook');
 
@@ -75,5 +91,7 @@ Route::group(['middleware' => [
     Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
     Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
 
+
     Route::get('/user/recommend', 'RecommendPet@recommend')->name('recommend');
 });
+

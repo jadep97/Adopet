@@ -12,33 +12,39 @@ class SearchController extends Controller
 {
     public function index(){
 
-        $pet = Pet::all();
+        $pet = Pet::distinct()->get(['breed']);
+       
         $petDetail = PetDetail::all();
+       // dd($petDetail);
         
 
-        return view('search.SearchPet')->with('pets', $pet, 'petDetails', $petDetail);
+        return view('search.SearchPet')->with('pets', $pet)->with('petDetail', $petDetail);
 
     }
-   public function SearchPet(Request $request){
-    
+   public function SearchPets(Request $request){
+        $filters = [
+           'breed' => $request->petBreed, 
+           'eyes' => $request->petEyes,
+           'ears' => $request->petEars,
+           'hair' => $request->petHair,
+           'tail' => $request->petTail,
+           'color' => $request->petColor,
+           'marking' => $request->petMarking,
+           'size' => $request->petSize
+        ];
        $pet = new Pet;
-       $pets = $pet->joinPetDetail(
-           $request->petBreed, 
-           $request->petEyes,
-           $request->petEars,
-           $request->petHair,
-           $request->petTail,
-           $request->petColor,
-           $request->petMarking,
-           $request->petSize
-        );
+       $pets = $pet->getSearch($filters);
     //    $searchpet = $pet->getJoinPetDetail($query,$request->petBreed);
        
-        //  dd($searchPet);
+       
         
-        
-    return view('search.showSearchPet')->with('pets', $pets);
+    return view('search.showSearchPet')->with('pets',$pets);
 
+
+    }
+    public function searchPet(Request $request){
+
+        
 
     }
 }

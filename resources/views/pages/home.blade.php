@@ -2,6 +2,32 @@
 
 @section('title', 'Welcome')
 
+
+@section('navlinks')
+	<!-- <li class="nav-item active">
+		<a class="nav-link waves-effect" href="/">Home
+			<span class="sr-only">(current)</span>
+		</a>
+	</li> -->
+	<li class="nav-item">
+		<a class="nav-link waves-effect" href="/pet">Pet List</a>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link waves-effect" href="/pet/create">Pet Create</a>
+	</li>
+	<!-- <li class="nav-item">
+		<a href=" {{ route('pet.create') }}" class="nav-link waves-effect">Adoption</a>
+	</li>
+	<li class="nav-item ">
+		<a href="/adoption" class="nav-link waves-effect">aaa</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link waves-effect" href="/">About Adopet</a>
+	</li> -->
+@endsection
+
+
 @section('content')
 	<!-- <div>
 		include('includes.carousel')
@@ -131,6 +157,8 @@
 								<!--Card image-->
 
 								<!--Card content-->
+								
+							
 								<div class="card-body">
 
 									<h4 class="font-weight-bold blue-text">
@@ -204,7 +232,7 @@
 
 		</div>
 
-		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" v-if="petDetail">
+		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -273,6 +301,7 @@
 								</span>
 							</h5>
 
+
 </div>
 								<div class="pet-comments">
 
@@ -310,18 +339,21 @@
 </div>
 
 
-						</div> <!-- // modal-body -->
 
-						 <div class="modal-footer">
+							
+							
+
 							 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
 							 <form method="get" class="form" :action="'/pet/likePet/' + petDetail.id">
 							 	<button type="submit" class="btn btn-primary">Like</button>
 							 </form>
 
+
 							 <form method="get" class="form" :action="'/pet/getUserRequest/' + petDetail.id">
 							 	<button type="submit" class="btn btn-primary">Request</button>
 							 </form>
+							 
 						 </div> <!-- // modal-footer -->
 					</div>
 			</div> <!-- // modal-dialog -->

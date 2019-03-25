@@ -20,7 +20,7 @@
 @section('content')
 	<div class="container" style="padding-top: 40px">
 			
-		<form method="get" class="form" action="/searchpet" enctype="multipart/form-data">
+		<form method="get" class="form" action="/searchpets" enctype="multipart/form-data">
 			{{-- @if ($errors->any())
 				<div class="alert alert-danger">
 					<ul>
@@ -39,9 +39,12 @@
 
                         <label>Breed</label>
                         <select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petBreed" id="petBreed">
-                                @foreach ($pets as $row)
-									<option value="{{ $row->breed }}">{{ $row->breed }}</option>
-								@endforeach
+													
+														<option value=""></option>			
+													@foreach ($pets as $pet)
+																<option value="{{ $pet->breed }}">{{ $pet->breed }}</option>
+																@endforeach
+																
                               </select>
                 		</div>
 
@@ -60,9 +63,12 @@
 
                         <label>Ears</label>
                         <select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petEars">
-                                <option value="rounded">Rounded</option>
-                                <option value="tipted">Tipted</option>
-                                <option value="down">Down</option>
+															
+														<option value=""></option>	
+													@foreach ($petDetail as $petDetails)
+																<option value="{{ $petDetails->ears }}">{{ $petDetails->ears }}</option>		
+																@endforeach
+																
                               </select>
                 </div>
                 
@@ -70,10 +76,10 @@
 
 					<label>Hair</label>
                 	  <select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petHair">
-                        <option value="long">Long</option>
-                        <option value="curl">Curl</option>
-                        <option value="thick">Thick</option>
-                        <option value="fluffy">Fluffy</option>
+												<option value=""></option>	
+												@foreach ($petDetail as $petDetails)
+															<option value="{{ $petDetails->hair }}">{{ $petDetails->hair }}</option>		
+															@endforeach
 					  </select>
 				</div>
 
@@ -81,6 +87,7 @@
 
 					<label>Tail</label>
 					<select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petTail">
+												<option value=""></option>
                         <option value="long">Long</option>
                         <option value="short">Short</option>
 					  </select>
@@ -98,6 +105,7 @@
 
 					<label>Markings</label>
 					<select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petMarking">
+							<option value=""></option>
 							<option value="dotted">Dotted</option>
 							<option value="stripes">Stripes</option>
 							<option value="wavy">Wavy</option>
@@ -109,6 +117,7 @@
 
 					<label>Size</label>
 					<select class="mdb-select md-form colorful-select dropdown-primary form-control" name="petSize">
+							<option value=""></option>
 							<option value="small">Small</option>
 							<option value="medium">Medium</option>
 							<option value="large">Large</option>
