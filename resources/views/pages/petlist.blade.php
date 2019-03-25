@@ -48,7 +48,8 @@
 
 							<td class="is-posted">
 								@if($pet->isPosted == 0)
-									<button type="submit" class="btn btn-sm btn-primary" @click="postPet({{$pet->id}})">Post</button>
+									<!-- <button type="submit" class="btn btn-sm btn-primary" @click="postPet({{$pet->id}})">Post</button> -->
+									<a class="btn btn-sm btn-primary" href="/pet/postPet/{{$pet->id}}">Post</a>
 								@else
 									<span>is posted</span>
 								@endif

@@ -21,7 +21,7 @@
 			<a class="nav-link waves-effect" href="/pet/create">Pet Create</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link waves-effect" href="{{ route('viewfblog') }}">User Facebook Data</a>
+			<a class="nav-link waves-effect" href="{{ route('viewfblog') }}">Facebook Data</a>
 		</li>
 		@endauth
 		<!-- <li class="nav-item">

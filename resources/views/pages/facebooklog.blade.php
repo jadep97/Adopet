@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
-
+@section('title','Facebook')
 
 @section('content')
 
 <a href="{{ route('fblog') }}" class="btn btn-primary">Renew Data</a>
+<a href="{{ route('recommend') }}" class="btn btn-primary">Recommend Me a Pet</a>
 <div class="table-responsive">
 <table class="table table-hover" border=1>
   <thead class="thead-dark">

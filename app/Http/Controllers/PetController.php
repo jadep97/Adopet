@@ -183,7 +183,8 @@ class PetController extends Controller
 
 				if($pet) {
 					$pet->update(['isPosted' => true]);
-				}
+                }
+        return redirect()->to('/'); 
 
     }
 

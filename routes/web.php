@@ -25,7 +25,7 @@ Route::get('/adoption', function () {
 //     return view('pages.petlist', ['pets' => $pets]);
 // });
 
-Route::get('/pet/postPet/{id}', 'PetController@postPet');
+Route::get('/pet/postPet/{id}', 'PetController@postPet')->name('postpet');
 Route::get('/pet/getPostedPets', 'PetController@getPostedPets');
 Route::get('/pet/getUserRequest/{id}', 'PetController@getUserRequest');
 
@@ -68,5 +68,5 @@ Route::group(['middleware' => [
     Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
     Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
 
-    Route::get('/recommend', 'GraphController@recommend');
+    Route::get('/user/recommend', 'RecommendPet@recommend')->name('recommend');
 });
