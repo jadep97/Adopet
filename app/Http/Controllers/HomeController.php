@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pet;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\FacebookLog;
+use DB;
 
 class HomeController extends Controller
 {
@@ -25,7 +28,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         return view('pages.home');
     }
 
@@ -33,5 +35,5 @@ class HomeController extends Controller
 		{
 
 				return view('pages.profile');
-		}
+        }
 }

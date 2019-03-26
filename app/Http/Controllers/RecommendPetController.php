@@ -10,6 +10,7 @@ use DB;
 class RecommendPetController extends Controller
 {
     public function recommend(){
+        if(Auth::user()){
         $logs = FacebookLog::where('user_id',Auth::user()->id)->get()->toArray();
 
         $posts_logs = json_decode($logs[0]['user_posts']);
@@ -128,11 +129,16 @@ class RecommendPetController extends Controller
         elseif(!max($dog['color'])){
             $pet_id = DB::table('pet_details')->select('pet_id');
             $return = DB::table('pets')->where('breed',max($dog['breed'][0]))->whereIn('id',$pet_id)->get()->toArray();
-        }else{//dd($dog['breed'][0]);
+        }
+        elseif(max($dog['breed']) && max($dog['color'])){//dd($dog['breed'][0]);
         //dd(max($dog["breed"])[0]);
         //$return = DB::select('select * from pets where breed = ? and id in (select pet_id from pet_details where color = ?),max($dog["breed"][0]), max($dog["color"][0]))')->get();
             $pet_id = DB::table('pet_details')->select('pet_id')->where('color', max($dog["color"])[0]);
             $return = DB::table('pets')->where('breed',max($dog["breed"])[0])->whereIn('id',$pet_id)->get()->toArray();
+            //return view('pages.home')->with(['result' => $return]);
+        }
+        else{
+            return view('pages.home')->with(['result' => '']);
         }
         //dd($return);
         //$return[0]->petImg = json_decode($return[0]->petImg);
@@ -142,7 +148,12 @@ class RecommendPetController extends Controller
             //dd($return[$key]->petImg);
             $return[$key]->petImg = json_decode($return[$key]->petImg);
         }
-
-        return view('search.recommendation')->with(['result' => $return]);
+    
+        return view('pages.homerec')->with(['result' => $return]);
+        //return view('search.recommendation')->with(['result' => $return]);
+        }
+        else{
+            return view('pages.home');
+        }
     }
 }

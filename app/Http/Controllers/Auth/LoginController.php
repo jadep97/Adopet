@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Facebook\Facebook;
+use File;
 
 class LoginController extends Controller
 {
@@ -22,6 +24,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    private $api;
     public function index(){
         return view('auth/login');
     }
@@ -35,9 +38,13 @@ class LoginController extends Controller
         return 'username';
     }
 
-    public function __construct()
+    public function __construct(Facebook $fb)
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware(function ($request, $next) use ($fb) {
+            $this->api = $fb;
+            return $next($request);
+        });
     }
 
     public function redirectToFacebookProvider()
@@ -53,6 +60,9 @@ class LoginController extends Controller
         $first_name = $splitName[0];
         $last_name = !empty($splitName[1]) ? $splitName[1] : '';
         $user = User::where('email','=',$auth_user->email)->first();
+        //$file_contents = file_get_contents($auth_user->getAvatar());
+        
+        
         if(!$user){
             $user = User::updateOrCreate(
                 [
@@ -70,8 +80,13 @@ class LoginController extends Controller
             $facebook->token = $auth_user->token;
             $facebook->save();
         }
- 
+        $this->api->setDefaultAccessToken(Auth::user()->token);
+        $response = $this->api->get('me/picture?redirect=false&height=960&width=959');
         
+        //dd($response->getGraphUser()['url']);
+        $file_contents = file_get_contents($response->getGraphUser()['url']);
+        File::put(public_path() . '/images/' . Auth::user()->first_name . "_profile.jpg", $file_contents);
+
         return redirect()->to('/'); 
     }
 }

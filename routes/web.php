@@ -11,26 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+
 // Route::get('/pet/list', function () {
 // 	$pets = DB::table('pets')->get();
 //
 //     return view('pages.petlist', ['pets' => $pets]);
 // });
 
+
+
 Route::get('/pet/postPet/{id}', 'PetController@postPet')->name('postpet');
 Route::get('/pet/getPostedPets', 'PetController@getPostedPets');
 
-Route::get('/pet/requestPet/{id}', 'PetController@requestPet');
+
 Route::get('/pet/getUserRequests', 'PetController@getUserRequest');
 
-Route::get('/pet/likePet/{id}', 'PetController@likePet');
+
 Route::get('/pet/getLikedPets', 'PetController@getLikedPets');
-
-
-Route::get('/pet/getCommentPets/{id}', 'PetController@getCommentPets');
 
 
 Route::get('/pet/getProfilePets', 'PetController@getProfilePets');
@@ -49,6 +46,9 @@ Auth::routes();
 Route::middleware(['auth'])->group(function(){
     Route::resource('pet', 'PetController');
     Route::get('/pet/commentPet/{id}', 'PetController@commentPet');
+    Route::get('/pet/likePet/{id}', 'PetController@likePet');
+    Route::get('/pet/requestPet/{id}', 'PetController@requestPet');
+    Route::get('/pet/getCommentPets/{id}', 'PetController@getCommentPets');
 });
 Route::middleware(['auth'])->group(function(){
 
@@ -89,11 +89,40 @@ Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider')
 
 Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderFacebookCallback');
 
+
+
 Route::group(['middleware' => [
     'auth'
 ]], function(){
     Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
     Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
-    Route::get('/user/recommend', 'RecommendPetController@recommend')->name('recommend');
+    
 });
 
+// Route::get('/', function(){
+//     if(Auth::user()){
+//         return view('pages.home');
+//     }else{
+
+//     }
+// });
+// Route::get('/searchpets',['uses' => 'SearchController@searchPet','as' => 'searchpets']);
+// Route::get('/',['uses' => 
+//                 if(Auth::user()){
+//                     return 'RecommendPetController@recommend','as' => 'recommend'
+//                 }
+//                 else{
+//                     return 'HomeController@index';
+//                 }
+//             ]);
+
+// Route::get('/', function(){
+//     if(Auth::user()){
+//         return 'RecommendPetController@recommend';
+//     }
+//     else{
+//         return 'HomeController@index';
+//     }
+// });
+Route::get('/','RecommendPetController@recommend');
+//Route::get('/', ['as' => 'home', 'uses' => (Auth::user()!=null ? 'RecommendPetController@recommend' : 'HomeController@index')]);
