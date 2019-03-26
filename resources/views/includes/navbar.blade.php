@@ -74,13 +74,13 @@
 
 					<!-- Split button -->
 					<div class="btn-group">
-					  <button href="/profile" type="button" class="btn btn-info">{{ Auth::user()->username }}</button>
+					  <button href="/profile" type="button" class="btn btn-info">{{ Auth::user()->first_name }}</button>
 					  <button type="button" class="btn btn-info dropdown-toggle px-3" data-toggle="dropdown" aria-haspopup="true"
 					    aria-expanded="false">
 					    <span class="sr-only">Toggle Dropdown</span>
 					  </button>
 					  <div class="dropdown-menu">
-					    <a class="dropdown-item" href="#">Action</a>
+					    <a class="dropdown-item" href="{{ route('recommend') }}">Recommend</a>
 							<a class="dropdown-item" href="/pet">Pet List</a>
 							<a class="dropdown-item" href="/pet/create">Pet Create</a>
 

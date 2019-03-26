@@ -1,0 +1,1 @@
+{"breed":["husky","labrador","bulldog","pug"],"color":["white","black","brown","gold"]}

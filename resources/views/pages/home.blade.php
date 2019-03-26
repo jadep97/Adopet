@@ -312,7 +312,7 @@
 									<div class="pet-comments-inner">
 										<h5>
 											<h6 v-for="comment in comments">
-												"@{{ comment.petComment }}" from
+												"@{{ comment.petComment }}" name:
 												<span class="font-weight-bold blue-text">
 													@{{ comment.username }}
 												</span>

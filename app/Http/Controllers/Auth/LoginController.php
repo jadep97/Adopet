@@ -42,8 +42,8 @@ class LoginController extends Controller
 
     public function redirectToFacebookProvider()
     {
-        return Socialite::driver('facebook')->scopes([
-            "email", "user_age_range", "user_birthday", "user_gender", "user_posts", "user_status"])->redirect();
+        return Socialite::driver('facebook')->scopes(["email", "user_age_range", "user_birthday", "user_gender", "user_posts", "user_status"])->redirect();
+        //var_dump(Socialite::driver('facebook')->scopes(["email", "user_age_range", "user_birthday", "user_gender", "user_posts", "user_status"])->redirect());
     }
 
     public function handleProviderFacebookCallback()

@@ -29,7 +29,7 @@ Route::get('/pet/getUserRequests', 'PetController@getUserRequest');
 Route::get('/pet/likePet/{id}', 'PetController@likePet');
 Route::get('/pet/getLikedPets', 'PetController@getLikedPets');
 
-Route::get('/pet/commentPet/{id}', 'PetController@commentPet');
+
 Route::get('/pet/getCommentPets/{id}', 'PetController@getCommentPets');
 
 
@@ -48,6 +48,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('pet', 'PetController');
+    Route::get('/pet/commentPet/{id}', 'PetController@commentPet');
 });
 Route::middleware(['auth'])->group(function(){
 
@@ -93,8 +94,6 @@ Route::group(['middleware' => [
 ]], function(){
     Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
     Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
-
-
-    Route::get('/user/recommend', 'RecommendPet@recommend')->name('recommend');
+    Route::get('/user/recommend', 'RecommendPetController@recommend')->name('recommend');
 });
 
