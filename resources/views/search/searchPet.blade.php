@@ -20,7 +20,7 @@
 @section('content')
 	<div class="container" style="padding-top: 40px">
 			
-		<form method="get" class="form" action="/searchpets" enctype="multipart/form-data">
+		<form method="get" class="form" action="/searchpet" enctype="multipart/form-data">
 			{{-- @if ($errors->any())
 				<div class="alert alert-danger">
 					<ul>

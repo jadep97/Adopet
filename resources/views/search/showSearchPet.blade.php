@@ -44,12 +44,17 @@
 				</ul>
 				<!-- Links -->
 
-				<form class="form-inline">
-					<div class="md-form my-0">
-						<a href="{{ url('/search') }}"><button type="button" class="btn btn-mdb-color">Pet Finder</button></a>
-						<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-					</div>
-				</form>
+				<a href="{{ url('/search') }}"><button type="button" class="btn btn-mdb-color">Pet Finder</button></a>
+				<form class="form-inline" action="/search/searchpets" method="get">
+						
+						<div class="md-form my-0">
+							
+							<input class="form-control mr-sm-2" name="searchData" id="searchData" type="text" placeholder="Search" > 
+
+					
+							
+						</div>
+					</form>
 			</div>
 			<!-- Collapsible content -->
 
@@ -62,8 +67,10 @@
 			
 				@foreach ($pets as $pet)
 				@php
+					//dd($pet);
 					$image = json_decode($pet->petImg,true);
-					//dd($image);
+					
+					
 				@endphp
 				<!--Grid column-->
 				<div class="col-lg-3 col-md-6 mb-4" @click="showModal(pet)" >
@@ -174,6 +181,7 @@
 						<div class="modal-body">
 							@foreach ($image as $images)
 							<img src={{ url('images/'.$images) }} class="card-img-top img-responsize" height="175">
+							<hr>
 							@endforeach
 								{{-- <img class="img-responsive"
 										 v-if="petImages"
@@ -181,7 +189,7 @@
 										 :src="'/images/'+ img"
 										 class="card-img-top"
 										 height="175"> --}}
-							<hr>
+							
 
 <div class="pet-details">
 		<div class="pet-info">
@@ -247,7 +255,7 @@
 									</div>
 
 									<!-- Comment section  modal-->
-									<form method="get" class="form" :action="'/pet/commentPet/' + petDetail.id">
+									<form method="get" class="form" action="{{ route('getSearchCommentPet'. $pets->id) }}">
 
 										<div class="com-inpt">
 											<input type="text" name="petComment" id="petComment" class="form-control" placeholder="Comment" required rows="3"></textarea>

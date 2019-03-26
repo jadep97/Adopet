@@ -60,55 +60,72 @@ class Pet extends Model
                     if($filters['breed']){
                       
                      
-                      $query->orWhere('breed','like',$filters['breed']);
+                      $query->Where('breed','like',$filters['breed']);
                       
                               
                     }
                     if($filters['eyes']){
                       
-                     $query->orWhere('eyes','LIKE', '%'.$filters['eyes'].'%');
+                     $query->Where('eyes','LIKE', '%'.$filters['eyes'].'%');
                       
                               
                     }
                     if($filters['ears']){
                       
-                    $query->orWhere('ears','LIKE', $filters['ears']);
+                    $query->Where('ears','LIKE', $filters['ears']);
                      
                               
                     }
                     if($filters['hair']){
                       
-                     $query->orwhere('hair','LIKE', '%'.$filters['hair'].'%');
+                     $query->where('hair','LIKE', '%'.$filters['hair'].'%');
                      
                               
                     }
                     if($filters['tail']){
                       
-                     $query->orWhere('tail','LIKE', '%'.$filters['tail'].'%');
+                     $query->Where('tail','LIKE', '%'.$filters['tail'].'%');
                      
                               
                     }
                     if($filters['color']){
                       
-                      $query->orWhere('color','LIKE', '%'.$filters['color'].'%');
+                      $query->Where('color','LIKE', '%'.$filters['color'].'%');
                     
                               
                     }
                     if($filters['marking']){
                       
-                     $query->orWhere('marking','LIKE', '%'.$filters['marking'].'%');
+                     $query->Where('marking','LIKE', '%'.$filters['marking'].'%');
                       
                               
                     }
                     if($filters['size']){
                       
-                     $query->orWhere('size','LIKE', $filters['size']);
+                     $query->Where('size','LIKE', $filters['size']);
                       
                               
                     }
 
-                   
                     return $query->get();
+
+
+    }
+    public function getSearchPets($filters){
+//dd($filters);
+      $query = DB::table('pets')
+        ->join('pet_details', 'pets.id', '=', 'pet_details.pet_id')
+        ->orWhere('breed','like', '%'.$filters.'%')
+        ->orWhere('eyes','LIKE', '%'.$filters.'%')
+        ->orWhere('ears','LIKE', '%'.$filters.'%')
+        ->orwhere('hair','LIKE', '%'.$filters.'%')
+        ->orWhere('tail','LIKE', '%'.$filters.'%')
+        ->orWhere('color','LIKE', '%'.$filters.'%')
+        ->orWhere('marking','LIKE', '%'.$filters.'%')
+        ->orWhere('size','LIKE', '%'.$filters.'%')
+        ->get();
+        return $query;
+
 
 
     }

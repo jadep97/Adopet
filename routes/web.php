@@ -52,8 +52,11 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth'])->group(function(){
 
     Route::get('/search', 'SearchController@index');
-    Route::get('/searchpets',['uses' => 'SearchController@searchPet','as' => 'searchpets']);
+    Route::get('/searchpet',['uses' => 'SearchController@searchPet','as' => 'searchpet']);
+    Route::get('/search/searchpets', 'SearchController@SearchPets')->name('searchpets');
+    Route::get('/search/searchpets', 'SearchController@SearchPets')->name('searchpets');
     Route::resource('search', 'SearchController');
+    Route::get('/search/getSearchCommentPet/{id}', 'SearchController@getSearchCommentPet')->name('getSearchCommentPet');
 });
 
 
@@ -78,8 +81,8 @@ Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activa
 // });
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
-Route::get('/search','SearchController@index');
-Route::get('/searchpets','SearchController@searchPets');
+//Route::get('/search','SearchController@index');
+//Route::get('/searchpets','SearchController@searchPets');
 
 Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebookProvider')->name('facebook');
 

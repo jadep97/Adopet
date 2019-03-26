@@ -71,11 +71,15 @@
 
 					</ul>
 					<!-- Links -->
-
-					<form class="form-inline">
+					<a href="{{ url('/search') }}"><button type="button" class="btn btn-mdb-color">Pet Finder</button></a>
+				<form class="form-inline" action="/search/searchpets" method="get">
+						
 						<div class="md-form my-0">
-							<a href="{{ url('/search') }}"><button type="button" class="btn btn-mdb-color">Pet Finder</button></a>
-							<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+							
+							<input class="form-control mr-sm-2" name="searchData" id="searchData" type="text" placeholder="Search" > 
+
+					
+							
 						</div>
 					</form>
 				</div>
@@ -232,7 +236,7 @@
 
 		</div>
 
-		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" v-if="petDetail">
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -360,4 +364,11 @@
 		</div>  <!-- // modal -->
 	</main>
 	<!--Main layout-->
+
+{{-- 	
+		@if(session('success'))
+		<script>alert('No data found');</script>
+		{{ redirect('home') }}
+		@endif --}}
+	
 @endsection

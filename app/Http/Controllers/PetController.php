@@ -268,7 +268,8 @@ class PetController extends Controller
 				]);
 
 				$comment->save();
-					return redirect('/')->with('success', 'Sent');
+          return redirect('/')->with('success', 'Sent')
+          ;
 		}
 
 		public function getCommentPets($id) {
