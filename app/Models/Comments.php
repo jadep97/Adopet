@@ -22,4 +22,9 @@ class Comments extends Model
 			{
 				return $this->belongsTo(User::class);
 			}
+			public function getComments($id){
+				return $query = DB::table('comments')
+								->where('pet_id', 'LIKE', $id)
+								->get();
+			}
 }

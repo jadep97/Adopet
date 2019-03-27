@@ -102,7 +102,7 @@
 				  <h5>
 					<strong>
 					  <a href="" class="dark-grey-text">{{ $pet->petName }}
-						<span class="badge badge-pill danger-color">NEW</span>
+						{{-- <span class="badge badge-pill danger-color">NEW</span> --}}
 					  </a>
 					</strong>
 				  </h5>
@@ -193,50 +193,50 @@
 
 <div class="pet-details">
 		<div class="pet-info">
-
+			
 							<h5>
 								<strong>Name:</strong>
 								<span>
-									@{{ petDetail.petName }}
+									{{ $pet->petName }}
 								</span>
 							</h5>
 							<h5>
 								<strong>Breed:</strong>
 								<span>
-									@{{ petDetail.breed }}
+									{{ $pet->breed }}
 								</span>
 							</h5>
 							<h5>
 								<strong>Birth:</strong>
 								<span>
-									@{{ petDetail.petBirth | formatDate }}
+									{{ $pet->petBirth }}
 								</span>
 							</h5>
 							<h5>
 								<strong>Owner:</strong>
 								<span>
-									@{{ petDetail.petOwner }}
+									{{ $pet->petOwner }}
 								</span>
 							</h5>
 							<h5>
 								<strong>Address:</strong>
 								<span>
-									@{{ petDetail.address }}
+									{{ $pet->address }}
 								</span>
 							</h5>
 							<h5>
 								<strong>Description:</strong>
 								<span>
-									@{{ petDetail.description }}
+									{{ $pet->description }}
 								</span>
 							</h5>
 
-							<h5>
+							{{-- <h5>
 								<strong>Likes:</strong>
 								<span>
-									@{{ petDetail.likeCount }}
+									{{ $pet->likeCount }}
 								</span>
-							</h5>
+							</h5> --}}
 
 
 </div>
@@ -253,10 +253,12 @@
 											</h6>
 										</h5>
 									</div>
-
+									
+											
+									
 									<!-- Comment section  modal-->
-									<form method="get" class="form" action="{{ route('getSearchCommentPet'. $pets->id) }}">
-
+									<form method="post" class="form" action="/search/getCommentPet/{{$pet->id}}">
+										@csrf
 										<div class="com-inpt">
 											<input type="text" name="petComment" id="petComment" class="form-control" placeholder="Comment" required rows="3"></textarea>
 										</div>
@@ -264,14 +266,11 @@
 										<div class="com-btn">
 											<button type="submit" class="btn btn-primary">Send Message</button>
 										</div>
-
+									
 
 									</form>
 									<!-- Comment section -->
 								</div> <!-- // pet-comments -->
-
-
-
 
 </div>
 
@@ -282,7 +281,7 @@
 
 							 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-							 <form method="get" class="form" :action="'/pet/likePet/' + petDetail.id">
+							 <form method="get" class="form" action="/search/getLikePet/{{$pet->id}}">
 							 	<button type="submit" class="btn btn-primary">Like</button>
 							 </form>
 

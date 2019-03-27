@@ -57,7 +57,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/search/searchpets', 'SearchController@SearchPets')->name('searchpets');
     Route::get('/search/searchpets', 'SearchController@SearchPets')->name('searchpets');
     Route::resource('search', 'SearchController');
-    Route::get('/search/getSearchCommentPet/{id}', 'SearchController@getSearchCommentPet')->name('getSearchCommentPet');
+    Route::post('/search/getCommentPet/{id}', 'SearchController@getCommentPet')->name('getCommentPet');
+    Route::get('/search/getLikePet/{id}', 'SearchController@likePet')->name('getLikePet');
 });
 
 

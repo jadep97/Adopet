@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pet;
 use App\Models\PetDetail;
 use App\Models\Comments;
+use App\Models\Likes;
 use Auth;
 use DB;
 
@@ -61,18 +62,11 @@ class SearchController extends Controller
         return view('search.showSearchPet')->with('pets',$pets);
     }
 
-    public function getSearchCommentPet(Request $request,$id){
+    public function getCommentPet(Request $request,$id){
 
-        // $filters = [
-            
-        //     'pet_id' => $pet->id,
-		// 	'user_id' => Auth::user()->id,
-		//     'username' => Auth::user()->username,
-		// 	'petComment' => $request->get('petComment'),    
-
-        // ];
-        // $petID = Pet::find($id);
-        $pet = Pet::all();
+        $pet = Pet::find($id);
+        $pets = Pet::all();
+        //dd($pet);
         
         $comment = new Comments([
             'pet_id' => $pet->id,
@@ -80,7 +74,24 @@ class SearchController extends Controller
 		    'username' => Auth::user()->username,
 			'petComment' => $request->get('petComment'), 
         ]);
-        return view('search.showSearchPet')->with('comment', $comment)->with('pets', $pet);
+        $comment->save();
+        
+        return redirect('/')->with('success', 'Sent');
 
     }
+    public function likePet($id)
+		{
+            $pet = Pet::find($id);
+            $pets = Pet::all();
+            
+			$like = Likes::create([
+
+				'pet_id' => $pet->id,
+				'user_id' => Auth::user()->id
+			]);
+
+			$like->save();
+			return redirect('/')->with('success', 'Liked');
+
+		}
 }
