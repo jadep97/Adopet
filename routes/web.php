@@ -42,13 +42,13 @@ Route::get('/login', 'loginController@index');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Auth::routes();
-
+Route::get('/pet/getCommentPets/{id}', 'PetController@getCommentPets');
 Route::middleware(['auth'])->group(function(){
     Route::resource('pet', 'PetController');
     Route::get('/pet/commentPet/{id}', 'PetController@commentPet');
     Route::get('/pet/likePet/{id}', 'PetController@likePet');
     Route::get('/pet/requestPet/{id}', 'PetController@requestPet');
-    Route::get('/pet/getCommentPets/{id}', 'PetController@getCommentPets');
+    
 });
 Route::middleware(['auth'])->group(function(){
 

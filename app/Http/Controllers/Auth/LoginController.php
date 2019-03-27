@@ -87,6 +87,9 @@ class LoginController extends Controller
         $file_contents = file_get_contents($response->getGraphUser()['url']);
         File::put(public_path() . '/images/' . Auth::user()->first_name . "_profile.jpg", $file_contents);
 
-        return redirect()->to('/'); 
+
+
+        return redirect()->to('/user'); 
     }
+    
 }

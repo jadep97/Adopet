@@ -118,7 +118,7 @@
             <!--Grid row-->
 
 
-            <p>Recommended</p>
+            <p>All Pets</p>
             <div class="row wow fadeIn">
                 <!--Grid column-->
                 <div class="col-lg-3 col-md-6 mb-4" v-for="pet in pets" @click="showModal(pet)">

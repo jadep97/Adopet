@@ -91,7 +91,7 @@ class GraphController extends Controller
                                 ]);
                 
             }
-            return redirect()->to('/user/view');
+            return redirect()->to('/');
             // }
             //echo "<pre>"; print_r($result); "</pre>";
         } catch (FacebookSDKException $e) {
