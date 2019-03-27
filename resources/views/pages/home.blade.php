@@ -130,219 +130,216 @@
                             <!-- <div class="view overlay">
 
 								</div> -->
-                            <img :src="'/images/'+ JSON.parse(pet.petImg)[0]" class="card-img-top" alt="" height="175">
-                            <a>
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                            <!--Card image-->
-
-                            <!--Card content-->
 
 
-                            <div class="card-body">
+									<img :src="'/images/'+ JSON.parse(pet.petImg)[0]" class="card-img-top" alt="" height="175">
+								<a>
+									<div class="mask rgba-white-slight"></div>
+								</a>
+								<!--Card image-->
 
-                                <h4 class="font-weight-bold blue-text">
-                                    <strong>@{{ pet.petName }}</strong>
-                                </h4>
+								<!--Card content-->
+								<div class="card-body">
 
-                                <h5>
-                                    <strong>
-                                        <a href="" class="dark-grey-text">@{{ pet.breed }}
-                                            <!-- <span class="badge badge-pill danger-color">NEW</span> -->
-                                        </a>
-                                    </strong>
-                                </h5>
-                            </div>
-                            <!--Card content-->
+									<h4 class="font-weight-bold blue-text">
+										<strong>@{{ pet.petName }}</strong>
+									</h4>
 
-                        </div>
+									<h5>
+										<strong>
+											<a href="" class="dark-grey-text">@{{ pet.breed }}
+												<!-- <span class="badge badge-pill danger-color">NEW</span> -->
+											</a>
+										</strong>
+									</h5>
+								</div>
+								<!--Card content-->
 
-
-                    </div>
-                    <!--Card-->
-
-                </div>
-                <!--Grid column-->
-            </div>
-            <!--Grid row-->
-
-        </section>
-        <!--Section: Products v.3-->
+								</div>
 
 
-        <!--Pagination-->
-        <nav class="d-flex justify-content-center wow fadeIn" v-if="false">
-            <ul class="pagination pg-blue">
+						</div>
+						<!--Card-->
 
-                <!--Arrow left-->
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                </li>
+					</div>
+					<!--Grid column-->
+				</div>
+				<!--Grid row-->
 
-                <li class="page-item active">
-                    <a class="page-link" href="#">1
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">4</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">5</a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!--Pagination-->
-
-    </div>
-
-    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-        aria-hidden="true" v-if="petDetail">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h5 class="modal-title" id="exampleModalLongTitle">@{{ petDetail.id }}</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div> <!-- // modal-header -->
-
-                <div class="modal-body">
-
-                    <img class="img-responsive" v-if="petImages" v-for="img in petImages" :src="'/images/'+ img"
-                        class="card-img-top" height="175">
-                    <hr>
-
-                    <div class="pet-details">
-                        <div class="pet-info">
-
-                            <h5>
-                                <strong>Name:</strong>
-                                <span>
-                                    @{{ petDetail.petName }}
-                                </span>
-                            </h5>
-                            <h5>
-                                <strong>Breed:</strong>
-                                <span>
-                                    @{{ petDetail.breed }}
-                                </span>
-                            </h5>
-                            <h5>
-                                <strong>Birth:</strong>
-                                <span>
-                                    @{{ petDetail.petBirth | formatDate }}
-                                </span>
-                            </h5>
-                            <h5>
-                                <strong>Owner:</strong>
-                                <span>
-                                    @{{ petDetail.petOwner }}
-                                </span>
-                            </h5>
-                            <h5>
-                                <strong>Address:</strong>
-                                <span>
-                                    @{{ petDetail.address }}
-                                </span>
-                            </h5>
-                            <h5>
-                                <strong>Description:</strong>
-                                <span>
-                                    @{{ petDetail.description }}
-                                </span>
-                            </h5>
-
-                            <h5>
-                                <strong>Likes:</strong>
-                                <span>
-                                    @{{ petDetail.likeCount }}
-                                </span>
-                            </h5>
+</section>
+<!--Section: Products v.3-->
 
 
-                        </div>
-                        <div class="pet-comments">
+			<!--Pagination-->
+			<nav class="d-flex justify-content-center wow fadeIn" v-if="false">
+				<ul class="pagination pg-blue">
 
-                            <div class="pet-comments-inner">
-                                <h5>
-                                    <h6 v-for="comment in comments">
-                                        "@{{ comment.petComment }}" name:
-                                        <span class="font-weight-bold blue-text">
-                                            @{{ comment.username }}
-                                        </span>
+					<!--Arrow left-->
+					<li class="page-item disabled">
+						<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+						</a>
+					</li>
 
-                                    </h6>
-                                </h5>
-                            </div>
+					<li class="page-item active">
+						<a class="page-link" href="#">1
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">2</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">4</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">5</a>
+					</li>
 
-                            <!-- Comment section  modal-->
-                            <form method="get" class="form" :action="'/pet/commentPet/' + petDetail.id">
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							<span class="sr-only">Next</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<!--Pagination-->
 
-                                <div class="com-inpt">
-                                    <input type="text" name="petComment" id="petComment" class="form-control"
-                                        placeholder="Comment" required rows="3"></textarea>
-                                </div>
+		</div>
 
-                                <div class="com-btn">
-                                    <button type="submit" class="btn btn-primary">Send Message</button>
-                                </div>
+		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" v-if="petDetail">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<h5 class="modal-title" id="exampleModalLongTitle">@{{ petDetail.id }}</h5>
+
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div> <!-- // modal-header -->
+
+						<div class="modal-body">
+
+								<img class="img-responsive"
+										 v-if="petImages"
+										 v-for="img in petImages"
+										 :src="'/images/'+ img"
+										 class="card-img-top"
+										 height="175">
+							<hr>
+
+<div class="pet-details">
+		<div class="pet-info">
+
+							<h5>
+								<strong>Name:</strong>
+								<span>
+									@{{ petDetail.petName }}
+								</span>
+							</h5>
+							<h5>
+								<strong>Breed:</strong>
+								<span>
+									@{{ petDetail.breed }}
+								</span>
+							</h5>
+							<h5>
+								<strong>Birth:</strong>
+								<span>
+									@{{ petDetail.petBirth | formatDate }}
+								</span>
+							</h5>
+							<h5>
+								<strong>Owner:</strong>
+								<span>
+									@{{ petDetail.petOwner }}
+								</span>
+							</h5>
+							<h5>
+								<strong>Address:</strong>
+								<span>
+									@{{ petDetail.address }}
+								</span>
+							</h5>
+							<h5>
+								<strong>Description:</strong>
+								<span>
+									@{{ petDetail.description }}
+								</span>
+							</h5>
+
+							<h5>
+								<strong>Likes:</strong>
+								<span>
+									@{{ petDetail.likeCount }}
+								</span>
+							</h5>
+
+</div>
+								<div class="pet-comments">
+
+									<div class="pet-comments-inner">
+										<h5>
+											<h6 v-for="comment in comments">
+												<span class="font-weight-bold blue-text">
+													@{{ comment.username }}
+												</span> :
+												<span class="com-comments">
+													@{{ comment.petComment }}
+												</span>
+												<span class="date-comments">
+													@{{ comment.created_at | formatDate}}
+												</span>
+
+											</h6>
+										</h5>
+									</div>
+
+									<!-- Comment section  modal-->
+									<form method="get" class="form" :action="'/pet/commentPet/' + petDetail.id">
+
+										<div class="com-inpt">
+											<input type="text" name="petComment" id="petComment" class="form-control" placeholder="Comment" required rows="3"></textarea>
+										</div>
+
+										<div class="com-btn">
+											<button type="submit" class="btn btn-primary">Send Message</button>
+										</div>
 
 
-                            </form>
-                            <!-- Comment section -->
-                        </div> <!-- // pet-comments -->
-
-
-
-
-                    </div>
-
-
-
+									</form>
+									<!-- Comment section -->
+								</div> <!-- // pet-comments -->
 
 
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-                    <form method="get" class="form" :action="'/pet/likePet/' + petDetail.id">
-                        <button type="submit" class="btn btn-primary">Like</button>
-                    </form>
+</div>
 
 
-                    <form method="get" class="form" :action="'/pet/getUserRequest/' + petDetail.id">
-                        <button type="submit" class="btn btn-primary">Request</button>
-                    </form>
+						</div> <!-- // modal-body -->
 
-                </div> <!-- // modal-footer -->
-            </div>
-        </div> <!-- // modal-dialog -->
-    </div> <!-- // modal -->
-</main>
-<!--Main layout-->
+						 <div class="modal-footer">
+							 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-{{-- 	
-		@if(session('success'))
-		<script>alert('No data found');</script>
-		{{ redirect('home') }}
-@endif --}}
+							 <form method="get" class="form" :action="'/pet/likePet/' + petDetail.id">
+							 	<button type="submit" class="btn btn-primary">Like</button>
+							 </form>
+
+							 <form method="get" class="form" :action="'/pet/requestPet/' + petDetail.id">
+							 	<button type="submit" class="btn btn-primary">Request</button>
+							 </form>
+						 </div> <!-- // modal-footer -->
+					</div>
+			</div> <!-- // modal-dialog -->
+		</div>  <!-- // modal -->
+	</main>
+	<!--Main layout-->
 
 @endsection

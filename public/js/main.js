@@ -39,6 +39,7 @@ var app = new Vue({
   data: {
 		pets: {},
 		likes: {},
+		requests: {},
 		imgSrc: '',
 		petDetail: {},
 		petImages: [],
@@ -48,7 +49,7 @@ var app = new Vue({
 
 	filters: {
 	  formatDate: function (date) {
-	    	return moment(date).format('MMM D, YYYY');
+	    	return moment(date).format('MMM DD, YYYY');
 	  }
 	},
 
@@ -56,9 +57,13 @@ var app = new Vue({
 	created: function() {
 		this.getLikedPets();
 
-		if(window.location.href.indexOf("profile") > -1) {
+
+
+		if(window.location.href.indexOf("profile") >-1) {
 			this.getProfilePets();
-		} else {
+			this.getRequestPets();
+		}
+		else {
 			this.getPostedPets();
 		}
 	},
@@ -99,7 +104,7 @@ var app = new Vue({
 			axios.get('/pet/getPostedPets/')
 						.then(function (response) {
 							$this.pets = response.data;
-							// console.log(response.data);
+							console.log(response.data);
 						});
 		},
 
@@ -109,8 +114,20 @@ var app = new Vue({
 			axios.get('/pet/getProfilePets/')
 						.then(function (response) {
 							$this.pets = response.data;
-							console.log(response.data);
+
 						});
+		},
+
+		getRequestPets: function() {
+			let $this = this;
+
+			axios.get('/pet/getRequestPets/')
+									.then(function (response) {
+										$this.requests = response.data;
+
+										console.log(response.data);
+									});
+
 		},
 
 		getLikedPets: function() {

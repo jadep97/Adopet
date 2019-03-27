@@ -295,24 +295,23 @@ class PetController extends Controller
     }
 
 
-		// public function getUserRequest($id)
-		// {
-		// 	return DB::select("SELECT DISTINCT
-		// 										pets.id,
-		// 										petName,
-		// 										petOwner,
-		// 										petBirth,
-		// 										breed,
-		// 										address,
-		// 										description,
-		// 										petImg,
-		//
-		// 										likes.pet_id,
-		// 										(SELECT count(*) from likes WHERE pet_id = pets.id) as likeCount
-		// 		FROM pets LEFT JOIN likes on pets.id = likes.pet_id
-		// 		WHERE isPosted = 1
-		// 		ORDER BY likeCount DESC");
-		// }
+		public function getRequestPets() {
+					return DB::select("SELECT DISTINCT
+														pets.id,
+														petName,
+														petOwner,
+														petBirth,
+														breed,
+														address,
+														description,
+														petImg,
+														pets.user_id as pets_user_id,
+														pet_requests.pet_id as request_pet_id
 
+														(SELECT count(*) from likes WHERE pet_id = pets.id) as likeCount
+						FROM pets LEFT JOIN likes on pets.id = likes.pet_id
+						LEFT JOIN pet_requests on pet.id = pet_requests.pet_id
+						WHERE isPosted = 1 AND pets.user_id = ". Auth::user()->id);
+		}
 
 }

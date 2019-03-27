@@ -24,13 +24,14 @@ Route::get('/pet/postPet/{id}', 'PetController@postPet')->name('postpet');
 Route::get('/pet/getPostedPets', 'PetController@getPostedPets');
 
 
-Route::get('/pet/getUserRequests', 'PetController@getUserRequest');
+Route::get('/pet/requestPet/{id}', 'PetController@requestPet');
+Route::get('/pet/getRequestPets', 'PetController@getRequestPets');
 
 
 Route::get('/pet/getLikedPets', 'PetController@getLikedPets');
 
-
 Route::get('/pet/getProfilePets', 'PetController@getProfilePets');
+
 
 Route::resource('pet', 'PetController');
 
@@ -48,7 +49,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pet/commentPet/{id}', 'PetController@commentPet');
     Route::get('/pet/likePet/{id}', 'PetController@likePet');
     Route::get('/pet/requestPet/{id}', 'PetController@requestPet');
-    
+
 });
 Route::middleware(['auth'])->group(function(){
 
@@ -73,7 +74,7 @@ Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activa
 
 // Route::middleware(['auth'])->group(function(){
 
-    
+
 //     // Route::get('/post/{id}', 'CommentController@show');
 //     Route::resource('comment', 'CommentController');
 //     Route::get('comment', 'CommentController@index');
@@ -97,7 +98,7 @@ Route::group(['middleware' => [
 ]], function(){
     Route::get('/user', 'GraphController@retrieveUserProfile')->name('fblog');
     Route::get('/user/view', 'GraphController@viewLog')->name('viewfblog');
-    
+
 });
 
 // Route::get('/', function(){
@@ -108,7 +109,7 @@ Route::group(['middleware' => [
 //     }
 // });
 // Route::get('/searchpets',['uses' => 'SearchController@searchPet','as' => 'searchpets']);
-// Route::get('/',['uses' => 
+// Route::get('/',['uses' =>
 //                 if(Auth::user()){
 //                     return 'RecommendPetController@recommend','as' => 'recommend'
 //                 }
