@@ -99,8 +99,6 @@ header,
 }
 
 .pet-info, .pet-comments {
-	display: block;
-	float: left;
 padding: 15px;
 width: 50%;
 }
@@ -114,15 +112,36 @@ width: 50%;
 	/* margin-left: 25px; */
 		/* width: calc(50% - 25px); */
 	min-height: 250px;
+	float: right;
+	    margin-top: -255px;
 }
 .pet-comments-inner {
 	padding: 15px;
 	min-height: 185px;
+	height: 400px;
 	border-radius: 7px;
 	background: #f1f1f1;
 	box-shadow: 0px 0px 41px 0px rgba(0,0,0,0.1) inset;
-	overflow: scroll;
+	overflow: auto;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
+.pet-requests {
+	/* background: red; */
+	/* margin-left: 25px; */
+		/* width: calc(50% - 25px); */
+	/* min-height: 250px; */
+
+}
+.pet-requests-inner {
+	padding: 15px;
+	min-height: 198px;
+	border-radius: 7px;
+	background: #f1f1f1;
+	box-shadow: 0px 0px 41px 0px rgba(0,0,0,0.1) inset;
+	overflow: auto;
+}
+
 .com-inpt, .com-btn {
 	display: block;
 	float: left;
@@ -137,10 +156,7 @@ width: 50%;
 	/* width: calc(50% - 30px); */
 	width: calc(50% - 60px);
 	margin: 0 auto;
-
-
 }
-
 
 .com-btn button {
 	margin: 0 auto;
@@ -154,4 +170,11 @@ width: 50%;
 }
 .com-comments {
 		margin-left: 10px;
+}
+.chatbox {
+	width: 1180px;
+}
+
+.like-and-request-buttons form {
+	display: inline-block;
 }

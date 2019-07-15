@@ -36,4 +36,9 @@ class HomeController extends Controller
 
 				return view('pages.profile');
         }
+		public function chat()
+		{
+
+				return view('pages.chat');
+	       }
 }

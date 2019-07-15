@@ -217,7 +217,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 
-							<h5 class="modal-title" id="exampleModalLongTitle">@{{ petDetail.id }}</h5>
+							<h5 class="modal-title" id="exampleModalLongTitle">@{{ 	petDetail.id }}</h5>
 
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -309,7 +309,7 @@
 										</div>
 
 										<div class="com-btn">
-											<button type="submit" class="btn btn-primary">Send Message</button>
+											<button type="submit" id="comments" class="btn btn-primary">Send Message</button>
 										</div>
 
 
@@ -343,3 +343,27 @@
 	<!--Main layout-->
 
 @endsection
+
+<script src="/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+
+$('#addContactSubmit').click(function (e) {
+			e.preventDefault();
+			alert('got here');
+			$.ajax({
+					type: 'POST',
+					url: '/contact/create/',
+					data: $("#addContactForm").serialize(),
+					success: function (data, status, xhttp) {
+							if (data) {
+									alert('Got Data');
+							} else {
+									alert('No Data');
+							}
+					},
+					dataType: html
+			});
+			return false;
+	});
+
+</script>

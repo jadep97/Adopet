@@ -9,8 +9,10 @@ use App\Models\Pet;
 use App\Models\User;
 use App\Models\Likes;
 use App\Models\Comments;
+use App\Models\Chat;
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 class PetController extends Controller
 {
@@ -73,7 +75,7 @@ class PetController extends Controller
 				if($request->hasfile('petImg')) {
 					foreach($request->file('petImg') as $image) {
             $name=$image->getClientOriginalName();
-            
+
 						$image->move(public_path().'/images/', $name);
 						$data[] = $name;
 					}
@@ -192,7 +194,7 @@ class PetController extends Controller
 				if($pet) {
 					$pet->update(['isPosted' => true]);
                 }
-        return redirect()->to('/');
+        return redirect()->to('/pet');
 
     }
 
@@ -214,7 +216,6 @@ class PetController extends Controller
 														description,
 														petImg,
 														pets.user_id as pets_user_id,
-
 														(SELECT count(*) from likes WHERE pet_id = pets.id) as likeCount
 						FROM pets LEFT JOIN likes on pets.id = likes.pet_id
 						WHERE isPosted = 1 AND pets.user_id = ". Auth::user()->id);
@@ -225,13 +226,12 @@ class PetController extends Controller
 			$pet = Pet::find($id);
 
 			$like = Likes::create([
-
 				'pet_id' => $pet->id,
 				'user_id' => Auth::user()->id
 			]);
 
 			$like->save();
-			return redirect('/')->with('success', 'Liked');
+			return view('/profile', compact('like'))->with('success');
 
 		}
 
@@ -249,33 +249,59 @@ class PetController extends Controller
 														likes.pet_id,
 														(SELECT count(*) from likes WHERE pet_id = pets.id) as likeCount
 								FROM pets LEFT JOIN likes on pets.id = likes.pet_id
-						WHERE isPosted = 1
-						ORDER BY likeCount DESC");
+								WHERE isPosted = 1
+								ORDER BY likeCount DESC");
 		}
 
-		public function commentPet(Request $request, $id)
+			public function commentPet(Request $request, $id)
     {
-			$pet = Pet::find($id);
-        
+				$pet = Pet::find($id);
+
         $comment = Comments::create([
 
 					'pet_id' => $pet->id,
 					'user_id' => Auth::user()->id,
 					'username' => Auth::user()->first_name,
 					'petComment' => $request->get('petComment'),
+					'created_at' => Carbon::Now(),
 
 
 				]);
 
 				$comment->save();
-          return redirect('/')->with('success', 'Sent')
-          ;
+          return redirect('/')->with('success', 'Sent');
 		}
 
 		public function getCommentPets($id) {
 
 			return DB::select('SELECT * FROM comments
 												 WHERE pet_id ='. $id);
+		}
+
+
+
+		public function getUserRequests($id) {
+
+			return DB::select('SELECT DISTINCT
+													pets.id,
+													petName,
+													petOwner,
+													petBirth,
+													breed,
+													address,
+													description,
+													petImg,
+													users.id,
+													users.username as username,
+													users.email as email,
+													pet_requests.user_id,
+													pet_requests.pet_id
+												FROM pets LEFT JOIN pet_requests
+												on pets.id = pet_requests.pet_id
+												LEFT JOIN users
+												on pet_requests.user_id = users.id
+												WHERE pets.id ='. $id);
+
 		}
 
 		public function requestPet($id)
@@ -297,21 +323,89 @@ class PetController extends Controller
 
 		public function getRequestPets() {
 					return DB::select("SELECT DISTINCT
-														pets.id,
-														petName,
-														petOwner,
-														petBirth,
-														breed,
-														address,
-														description,
-														petImg,
-														pets.user_id as pets_user_id,
-														pet_requests.pet_id as request_pet_id
-
-														(SELECT count(*) from likes WHERE pet_id = pets.id) as likeCount
-						FROM pets LEFT JOIN likes on pets.id = likes.pet_id
-						LEFT JOIN pet_requests on pet.id = pet_requests.pet_id
-						WHERE isPosted = 1 AND pets.user_id = ". Auth::user()->id);
+															pets.id,
+															petName,
+															petOwner,
+															petBirth,
+															breed,
+															address,
+															description,
+															petImg,
+															pet_requests.user_id,
+															pet_requests.pet_id
+														FROM pets LEFT JOIN pet_requests
+														on pets.id = pet_requests.pet_id
+														WHERE isPosted = 1
+														AND pet_requests.user_id = ". Auth::user()->id);
 		}
+
+		public function chatPet($adopterId, $petId)
+		{
+			$pet = Pet::find($petId);
+			$user = User::find($adopterId);
+
+			$chats = DB::select("SELECT * FROM chats WHERE petAdopter = ". $adopterId .
+												" AND pet_id = " . $petId);
+//dd($chat);
+			if($chats) { //  if may shud
+
+
+			} else { // if empty
+				Chat::create([
+					'pet_id' => $pet->id,
+					'petOwner' => $pet->user_id,
+					'petAdopter' => $user->id,
+					'created_at' => Carbon::Now()
+				])->save();
+
+
+			}
+				// $chat = Chat::create([
+				// 	'pet_id' => $pet->id,
+				// 	'petOwner' => $pet->user_id,
+				// 	'petAdopter' => $user->id,
+				// 	'created_at' => Carbon::Now()
+				// ]);
+				//
+				// $chat->save();
+
+				// return redirect('/chatPet')->with('success');
+				return view('pages.chat', compact('chats'));
+		}
+
+		public function messagePet(Request $request, $id)
+		{
+
+				$message = Message::create([
+					'chat_id' => $id,
+					'sender' => Auth::user()->id,
+					'text' => $request->get('message'),
+					'created_at' => Carbon::Now()
+				]);
+
+				$messagePet->save();
+				return redirect('/')->with('success', 'Requested');
+		}
+
+
+		// public function getChatAdopter($id)
+		// {
+		// 		$pet = Pet::find($id);
+		//
+		// 		$chat = Chat::create([
+		//
+		// 			'pet_id' => $pet->id,
+		// 			'pet_user_id' =>  Auth::user()->id,
+		// 			'petOwner' => $pet->petOwner,
+		// 			'adopter_id' => $id,
+		// 			'username' => Auth::user()->first_name,
+		// 			'pet_chat' => $request->get('pet_chat'),
+		// 			'created_at' => Carbon::Now(),
+		//
+		// 		]);
+		//
+		// 		$petRequest->save();
+		// 		return redirect('/')->with('success', 'Requested');
+		// }
 
 }

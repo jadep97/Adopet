@@ -19,7 +19,8 @@
 				<div class="form-group">
 					<input
 						type="file"
-						name="petImg[]" id="petImg"
+						name="petImg[]"
+						id="petImg"
 						class="form-control"
 						accept="image/x-png,image/gif,image/jpeg"
 						multiple

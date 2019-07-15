@@ -24,8 +24,8 @@ Route::get('/pet/postPet/{id}', 'PetController@postPet')->name('postpet');
 Route::get('/pet/getPostedPets', 'PetController@getPostedPets');
 
 
-Route::get('/pet/requestPet/{id}', 'PetController@requestPet');
 Route::get('/pet/getRequestPets', 'PetController@getRequestPets');
+
 
 
 Route::get('/pet/getLikedPets', 'PetController@getLikedPets');
@@ -33,11 +33,13 @@ Route::get('/pet/getLikedPets', 'PetController@getLikedPets');
 Route::get('/pet/getProfilePets', 'PetController@getProfilePets');
 
 
+
 Route::resource('pet', 'PetController');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::get('/chat', 'HomeController@chat')->name('chat');
 
 Route::get('/login', 'loginController@index');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -47,21 +49,26 @@ Route::get('/pet/getCommentPets/{id}', 'PetController@getCommentPets');
 Route::middleware(['auth'])->group(function(){
     Route::resource('pet', 'PetController');
     Route::get('/pet/commentPet/{id}', 'PetController@commentPet');
+		Route::get('/pet/chatPet/{userId}/{petId}', 'PetController@chatPet');
     Route::get('/pet/likePet/{id}', 'PetController@likePet');
     Route::get('/pet/requestPet/{id}', 'PetController@requestPet');
+		Route::get('/pet/getUserRequests/{id}', 'PetController@getUserRequests');
+		Route::get('/pet/getChatPets/{userId}/{petId}', 'PetController@getChat');
 
 });
 Route::middleware(['auth'])->group(function(){
-
+		Route::resource('search', 'SearchController');
     Route::get('/search', 'SearchController@index');
     Route::get('/searchpet',['uses' => 'SearchController@searchPet','as' => 'searchpet']);
     Route::get('/search/searchpets', 'SearchController@SearchPets')->name('searchpets');
     Route::get('/search/searchpets', 'SearchController@SearchPets')->name('searchpets');
-    Route::resource('search', 'SearchController');
     Route::post('/search/getCommentPet/{id}', 'SearchController@getCommentPet')->name('getCommentPet');
     Route::get('/search/getLikePet/{id}', 'SearchController@likePet')->name('getLikePet');
 });
 
+Route::prefix('chat')->group(function () {
+    Route::get('/{chat_id}', 'ChatController@getChat');
+});
 
 Route::get('activate/{token}', 'Auth\RegisterController@activate')->name('activate');
 // ss

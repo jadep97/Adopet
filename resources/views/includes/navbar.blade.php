@@ -45,7 +45,7 @@
             </ul>
 
 
-          
+
 			<!-- Right -->
 			<ul class="navbar-nav nav-flex-icons">
 

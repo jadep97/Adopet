@@ -221,7 +221,7 @@
                                         </h5>
 
                                         <h5>
-                                            <strong>Likes:</strong>
+                                            <strong>Interested:</strong>
                                             <span id="petlikes">
                                                 {{count($likes)}}
                                             </span>
@@ -256,7 +256,7 @@
                                             </div>
 
                                             <div class="com-btn">
-                                                <button type="submit" class="btn btn-primary">Send Message</button>
+                                                <button type="submit" class="btn btn-primary">Send</button>
                                             </div>
 
 
@@ -270,7 +270,7 @@
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                                 <form method="get" class="form" action="/pet/likePet/{{ $value->id }}">
-                                    <button type="submit" class="btn btn-primary">Like</button>
+                                    <button type="submit" class="btn btn-primary">Interested</button>
                                 </form>
 
 

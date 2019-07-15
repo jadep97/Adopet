@@ -52,4 +52,12 @@
 		<script type="text/javascript" src="/js/vuejs.js"></script>
 		<!-- Main JS -->
 		<script type="text/javascript" src="/js/main.js"></script>
+
+		@auth
+			<script type="text/javascript">
+				window.currentUser = {
+					first_name: '{{ Auth::user()->first_name }}'
+				};
+			</script>
+		@endauth
 </html>
